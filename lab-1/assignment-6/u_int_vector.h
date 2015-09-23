@@ -6,9 +6,10 @@ class UIntVector {
 public:
 	explicit UIntVector (size_t);
 	UIntVector (UIntVector const&);
-	//UIntVector (UIntVector&&);
+	UIntVector (UIntVector&&) noexcept;
 	~UIntVector ();
-	//UIntVector& operator= (UIntVector&&);
+	UIntVector& operator= (UIntVector const&);
+	UIntVector& operator= (UIntVector&&);
 	unsigned int operator[] (size_t const&) const;
 	unsigned int& operator[] (size_t const&);
 	void reset();

@@ -10,6 +10,6 @@ u_int_vector:
 runner: u_int_vector
 	@echo " "
 	cxxtestgen --error-printer -o runner.cpp cxxtest_u_int_vector.h
-	g++ -o runner.out runner.cpp u_int_vector.o
+	g++ -std=c++11 -o runner.out runner.cpp u_int_vector.o
 	@echo "-------- runner built --------"
 	@echo " "

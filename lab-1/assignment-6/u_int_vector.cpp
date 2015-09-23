@@ -18,35 +18,50 @@ UIntVector::UIntVector (UIntVector const& v) {
 	}
 }
 
-/*//Move constructor.
-UIntVector::UIntVector (UIntVector&& v) {
-	this->frontSize = v.size();
-	this->backSize = this->frontSize;
-	this->array = v.array;
-}*/
+//Move constructor.
+UIntVector::UIntVector (UIntVector&& v) noexcept {
+	frontSize = v.frontSize;
+	backSize = v.backSize;
+	array = (unsigned int*)malloc(sizeof(unsigned int) * v.backSize);
+	for (auto i = 0; i < v.backSize; i++) {
+		array[i] = v.array[i];
+	}
+}
 
 //Destructor.
 UIntVector::~UIntVector () {
 	free(array);
 }
 
-/*//Copy assignment.
-UIntVector& UIntVector::operator= (UIntVector v) {
-
+//Copy-assignment operator.
+UIntVector& UIntVector::operator= (UIntVector const& v) {
+	if (&v == this) //If the user has tried to assign the UIntVector to itself.
+		return *this;
+	frontSize = v.frontSize;
+	backSize = v.backSize;
+	free(array); //Free the old space before we create any new.
+	array = (unsigned int*)malloc(sizeof(unsigned int) * v.backSize);
+	for (auto i = 0; i < v.backSize; i++) {
+		array[i] = v.array[i];
+	}
+	return *this;
 }
 
-//Move assignment.
+//Move-assignment operator.
 UIntVector& UIntVector::operator= (UIntVector&& v) {
-	delete[] this->array;
-	this->frontSize = 0;
-	this->backSize = 0;
-	this->backSize = v.backSize;
-	this->frontSize = v.frontSize;
-	this->array = v.array;
+	if (&v == this) //If the user has tried to move the UIntVector to itself.
+		return *this;
+	frontSize = v.frontSize;
+	backSize = v.backSize;
+	free(array); //Free the old space before we create any new.
+	array = (unsigned int*)malloc(sizeof(unsigned int) * v.backSize);
+	for (auto i = 0; i < v.backSize; i++) {
+		array[i] = v.array[i];
+	}
 	return *this;
-}*/
+}
 
-//Operator [] overload.
+//Operator [] overload (get value).
 unsigned int UIntVector::operator[] (size_t const& index) const {
 	if (index < frontSize) {
 		return array[index];
@@ -55,6 +70,7 @@ unsigned int UIntVector::operator[] (size_t const& index) const {
 	}
 }
 
+//Operator [] overload (set value).
 unsigned int& UIntVector::operator[] (size_t const& index) { //May be wrong. I just guessed my way to this.
 	if (index < frontSize) {
 		return array[index];

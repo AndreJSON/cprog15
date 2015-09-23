@@ -26,7 +26,84 @@ class MyTestSuite : public CxxTest::TestSuite {
       TS_ASSERT_EQUALS(b[9], c[9]);
     }
 
-    void test4 () { ////Testing the operator[] overload
+    void test3 () { //Testing the move constructor.
+      UIntVector a((size_t)10);
+      a[0] = (unsigned int)82;
+      a[5] = (unsigned int)99;
+      a[9] = (unsigned int)10005;
+      UIntVector b = std::move(a);
+      TS_ASSERT_EQUALS(b[0], 82);
+      TS_ASSERT_EQUALS(b[5], 99);
+      TS_ASSERT_EQUALS(b[9], 10005);
+      //Change values of the moved UIntVector and then check that it still behaves properly.
+      b[0] = (unsigned int)0;
+      b[5] = (unsigned int)1;
+      b[9] = (unsigned int)2;
+      TS_ASSERT_EQUALS(b[0], 0);
+      TS_ASSERT_EQUALS(b[5], 1);
+      TS_ASSERT_EQUALS(b[9], 2);
+    }
+
+    void test4 () { //Testing the copy-assignment operator.
+      UIntVector a((size_t)10);
+      a[0] = (unsigned int)82;
+      a[5] = (unsigned int)99;
+      a[9] = (unsigned int)10005;
+      UIntVector b((size_t)99);
+      UIntVector c((size_t)2);
+      c = a;
+      b = a;
+      a = a; //copy-ssigning a to itself.
+      //Now test so that all values are what they should be.
+      TS_ASSERT_EQUALS(a[0], 82);
+      TS_ASSERT_EQUALS(a[5], 99);
+      TS_ASSERT_EQUALS(a[9], 10005);
+      TS_ASSERT_EQUALS(b[0], 82);
+      TS_ASSERT_EQUALS(b[5], 99);
+      TS_ASSERT_EQUALS(b[9], 10005);
+      TS_ASSERT_EQUALS(c[0], 82);
+      TS_ASSERT_EQUALS(c[5], 99);
+      TS_ASSERT_EQUALS(c[9], 10005);
+      //Also make sure b has been downsized to the size of a.
+      TS_ASSERT_THROWS(b[10], std::out_of_range);
+      TS_ASSERT_EQUALS(b.size(), 10);
+    }
+
+    void test5 () {
+      UIntVector a((size_t)10);
+      a[0] = (unsigned int)82;
+      a[5] = (unsigned int)99;
+      a[9] = (unsigned int)10005;
+      UIntVector b((size_t)99);
+      UIntVector c((size_t)2);
+      c = std::move(a);
+      b = std::move(a);
+      a = std::move(a); //move-assigning a to itself.
+      //Now test so that all values are what they should be.
+      TS_ASSERT_EQUALS(a[0], 82);
+      TS_ASSERT_EQUALS(a[5], 99);
+      TS_ASSERT_EQUALS(a[9], 10005);
+      TS_ASSERT_EQUALS(b[0], 82);
+      TS_ASSERT_EQUALS(b[5], 99);
+      TS_ASSERT_EQUALS(b[9], 10005);
+      TS_ASSERT_EQUALS(c[0], 82);
+      TS_ASSERT_EQUALS(c[5], 99);
+      TS_ASSERT_EQUALS(c[9], 10005);
+      //Also make sure b has been downsized to the size of a.
+      TS_ASSERT_THROWS(b[10], std::out_of_range);
+      TS_ASSERT_EQUALS(b.size(), 10);
+    }
+
+    void test6 () { //Testing the operator[] overload on const objects.
+      UIntVector const a((size_t)10);
+      //First and last element should be accesible and equal to 0.
+      TS_ASSERT_EQUALS(a[0], 0);
+      TS_ASSERT_EQUALS(a[9], 0);
+      //Element at index 10 should be out of bounds since size is 10.
+      TS_ASSERT_THROWS(a[10], std::out_of_range);
+    }
+
+    void test7 () { //Testing the operator[] overload
       UIntVector a((size_t)10);
       a[0] = (unsigned int)82;
       a[5] = (unsigned int)99;
@@ -40,16 +117,7 @@ class MyTestSuite : public CxxTest::TestSuite {
       TS_ASSERT_EQUALS(a[0], 0);
     }
 
-    void test5 () { //Testing the operator[] overload on const objects.
-      UIntVector const a((size_t)10);
-      //First and last element should be accesible and equal to 0.
-      TS_ASSERT_EQUALS(a[0], 0);
-      TS_ASSERT_EQUALS(a[9], 0);
-      //Element at index 10 should be out of bounds since size is 10.
-      TS_ASSERT_THROWS(a[10], std::out_of_range);
-    }
-
-    void test7 () { //Testing the size member function.
+    void test8 () { //Testing the size member function.
       UIntVector a((size_t)0);
       UIntVector b((size_t)1);
       UIntVector c((size_t)10);
