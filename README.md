@@ -1,0 +1,1 @@
+A repo containing my lab assignments for the course "Programsystemkonstruktion i c++". Note that I have not written all code in this repository since some of the tasks required us to use premade c++ code.

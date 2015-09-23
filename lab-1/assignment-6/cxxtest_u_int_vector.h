@@ -1,0 +1,67 @@
+#include "u_int_vector.h"
+
+
+class MyTestSuite : public CxxTest::TestSuite {
+  public:
+    void test1 () { //Testing the regular constructor.
+      UIntVector a((size_t)10);
+      //The size should obviously be 10 here.
+      TS_ASSERT_EQUALS(a.size(), 10);
+      //Just testing on some of the elements that they are indeed initialized to 0.
+      TS_ASSERT_EQUALS(a[0], 0);
+      TS_ASSERT_EQUALS(a[5], 0);
+      TS_ASSERT_EQUALS(a[9], 0);
+    }
+
+    void test2 () { //Testing the copy constructor.
+      UIntVector a((size_t)10);
+      UIntVector b = a;
+      UIntVector c(b);
+      //They should have the same size.
+      TS_ASSERT_EQUALS(a.size(),b.size());
+      TS_ASSERT_EQUALS(b.size(),c.size());
+      //They should have the same elements in the same positions as well. Only testing a few here though.
+      TS_ASSERT_EQUALS(a[0], b[0]);
+      TS_ASSERT_EQUALS(a[7], c[7]);
+      TS_ASSERT_EQUALS(b[9], c[9]);
+    }
+
+    void test4 () { ////Testing the operator[] overload
+      UIntVector a((size_t)10);
+      a[0] = (unsigned int)82;
+      a[5] = (unsigned int)99;
+      a[9] = (unsigned int)10005;
+      TS_ASSERT_EQUALS(a[0], 82);
+      TS_ASSERT_EQUALS(a[5], 99);
+      TS_ASSERT_EQUALS(a[9], 10005);
+      a.reset();
+      TS_ASSERT_EQUALS(a[0], 0);
+      TS_ASSERT_EQUALS(a[0], 0);
+      TS_ASSERT_EQUALS(a[0], 0);
+    }
+
+    void test5 () { //Testing the operator[] overload on const objects.
+      UIntVector const a((size_t)10);
+      //First and last element should be accesible and equal to 0.
+      TS_ASSERT_EQUALS(a[0], 0);
+      TS_ASSERT_EQUALS(a[9], 0);
+      //Element at index 10 should be out of bounds since size is 10.
+      TS_ASSERT_THROWS(a[10], std::out_of_range);
+    }
+
+    void test7 () { //Testing the size member function.
+      UIntVector a((size_t)0);
+      UIntVector b((size_t)1);
+      UIntVector c((size_t)10);
+      UIntVector d((size_t)10000000);
+      //They should now have size 0,1,10 respectively 10000000
+      TS_ASSERT_EQUALS(a.size(),0);
+      TS_ASSERT_EQUALS(b.size(),1);
+      TS_ASSERT_EQUALS(c.size(),10);
+      TS_ASSERT_EQUALS(d.size(),10000000);
+    }
+
+
+};
+
+

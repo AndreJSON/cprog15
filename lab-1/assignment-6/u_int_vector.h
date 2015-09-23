@@ -1,0 +1,20 @@
+#include <stdexcept>
+#include <iostream>
+
+
+class UIntVector {
+public:
+	explicit UIntVector (size_t);
+	UIntVector (UIntVector const&);
+	//UIntVector (UIntVector&&);
+	~UIntVector ();
+	//UIntVector& operator= (UIntVector&&);
+	unsigned int operator[] (size_t const&) const;
+	unsigned int& operator[] (size_t const&);
+	void reset();
+	size_t size() const;
+
+private:
+	size_t backSize, frontSize;
+	unsigned int* array;
+};
