@@ -117,7 +117,21 @@ class MyTestSuite : public CxxTest::TestSuite {
       TS_ASSERT_EQUALS(a[0], 0);
     }
 
-    void test8 () { //Testing the size member function.
+    void test8 () { //Testing the reset member function.
+      UIntVector a((size_t)10);
+      a[0] = (unsigned int)82;
+      a[5] = (unsigned int)99;
+      a[9] = (unsigned int)10005;
+      a.reset();
+      //Now checking that the values have indeed been reset to 0.
+      TS_ASSERT_EQUALS(a[0], 0);
+      TS_ASSERT_EQUALS(a[5], 0);
+      TS_ASSERT_EQUALS(a[9], 0);
+      //Also checking that the size hasn't been modified.
+      TS_ASSERT_THROWS(a[10], std::out_of_range);
+    }
+
+    void test9 () { //Testing the size member function.
       UIntVector a((size_t)0);
       UIntVector b((size_t)1);
       UIntVector c((size_t)10);
@@ -129,6 +143,17 @@ class MyTestSuite : public CxxTest::TestSuite {
       TS_ASSERT_EQUALS(d.size(),10000000);
     }
 
+    void test10 () { //Just random testing.
+      UIntVector a((size_t)10);
+      a[0]++;
+      TS_ASSERT_EQUALS(a[0],1);
+
+      UIntVector const b((size_t)10);
+      //b[0]++; //When not commented out this should give a compile error.
+      b = b; //Not sure if this goes through compiler. it shouldnt do that i think.
+      TS_ASSERT_EQUALS(b.size(),10);
+      TS_ASSERT_EQUALS(b[0], 0);
+    }
 
 };
 

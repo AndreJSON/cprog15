@@ -16,6 +16,7 @@ public:
 	size_t size() const;
 
 private:
+	//void resize (size_t const&);
 	size_t backSize, frontSize;
 	unsigned int* array;
 };
