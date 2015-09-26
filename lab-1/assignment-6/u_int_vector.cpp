@@ -8,6 +8,18 @@ UIntVector::UIntVector (size_t size) {
 	reset();
 }
 
+//Constructor taking std::initializer_list<unsigned int>.
+UIntVector::UIntVector (std::initializer_list<unsigned int> il) {
+	frontSize = il.size();
+	backSize = frontSize;
+	array = (unsigned int*)malloc(sizeof(unsigned int) * frontSize);
+	auto i = 0;
+	for (auto n = il.begin(); n != il.end(); n++) {
+		array[i] = *n;
+		i++;
+	}
+}
+
 //Copy constructor.
 UIntVector::UIntVector (UIntVector const& v) {
 	frontSize = v.frontSize;
@@ -23,9 +35,12 @@ UIntVector::UIntVector (UIntVector&& v) noexcept {
 	frontSize = v.frontSize;
 	backSize = v.backSize;
 	array = (unsigned int*)malloc(sizeof(unsigned int) * v.backSize);
-	for (auto i = 0; i < v.backSize; i++) {
-		array[i] = v.array[i];
-	}
+	std::swap(array,v.array);
+	//reset the moved-from container.
+	v.frontSize = 0;
+	v.backSize = 0;
+	free(v.array);
+	v.array = nullptr;
 }
 
 //Destructor.
@@ -53,11 +68,13 @@ UIntVector& UIntVector::operator= (UIntVector&& v) {
 		return *this;
 	frontSize = v.frontSize;
 	backSize = v.backSize;
-	free(array); //Free the old space before we create any new.
-	array = (unsigned int*)malloc(sizeof(unsigned int) * v.backSize);
-	for (auto i = 0; i < v.backSize; i++) {
-		array[i] = v.array[i];
-	}
+	std::swap(array, v.array);
+	//reset the moved-from container.
+	v.frontSize = 0;
+	v.backSize = 0;
+	free(v.array);
+	v.array = nullptr;
+	
 	return *this;
 }
 

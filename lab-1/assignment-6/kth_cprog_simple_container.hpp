@@ -5,6 +5,7 @@
 class UIntVector {
 public:
 	explicit UIntVector (size_t);
+	UIntVector (std::initializer_list<unsigned int>);
 	UIntVector (UIntVector const&);
 	UIntVector (UIntVector&&) noexcept;
 	~UIntVector ();
