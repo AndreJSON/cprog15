@@ -38,6 +38,7 @@ Vector<T>::Vector (size_t size) {
 	frontSize = size;
 	backSize = size;
 	array = (T*)malloc(sizeof(T) * backSize);
+	reset();
 }
 
 //Constructor taking a size parameter and a value.
@@ -63,10 +64,66 @@ Vector<T>::Vector (std::initializer_list<T> il) {
 	}
 }
 
+//Copy constructor.
+template <typename T>
+Vector<T>::Vector (Vector const& v) {
+	frontSize = v.frontSize;
+	backSize = v.backSize;
+	array = (T*)malloc(sizeof(T) * v.backSize);
+	for (auto i = 0; i < v.backSize; i++) {
+		array[i] = v.array[i];
+	}
+}
+
+//Move constructor.
+template <typename T>
+Vector<T>::Vector (Vector&& v) noexcept {
+	frontSize = v.frontSize;
+	backSize = v.backSize;
+	array = (T*)malloc(sizeof(T) * v.backSize);
+	std::swap(array,v.array);
+	//reset the moved-from container.
+	v.frontSize = 0;
+	v.backSize = 0;
+	free(v.array);
+	v.array = nullptr;
+}
+
 //Destructor.
 template <typename T>
 Vector<T>::~Vector () {
 	free(array);
+}
+
+//Copy-assignment operator.
+template <typename T>
+Vector<T>& Vector<T>::operator= (Vector<T> const& v) {
+	if (&v == this) //If the user has tried to assign the Vector to itself.
+		return *this;
+	frontSize = v.frontSize;
+	backSize = v.backSize;
+	free(array); //Free the old space before we create any new.
+	array = (T*)malloc(sizeof(T) * v.backSize);
+	for (auto i = 0; i < v.backSize; i++) {
+		array[i] = v.array[i];
+	}
+	return *this;
+}
+
+//Move-assignment operator.
+template <typename T>
+Vector<T>& Vector<T>::operator= (Vector<T>&& v) {
+	if (&v == this) //If the user has tried to move the Vector to itself.
+		return *this;
+	frontSize = v.frontSize;
+	backSize = v.backSize;
+	std::swap(array, v.array);
+	//reset the moved-from container.
+	v.frontSize = 0;
+	v.backSize = 0;
+	free(v.array);
+	v.array = nullptr;
+	return *this;
 }
 
 //Operator [] overload (get value).
