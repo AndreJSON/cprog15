@@ -109,6 +109,40 @@ class MyTestSuite : public CxxTest::TestSuite {
 			TS_ASSERT_EQUALS(c.size(), 10);
 		}
 
+		void test9 () { //Testing the operator[] overload on const objects.
+			Vector<unsigned int> const a((size_t)10);
+			//First and last element should be accesible and equal to 0.
+			TS_ASSERT_EQUALS(a[0], 0);
+			TS_ASSERT_EQUALS(a[9], 0);
+			//Element at index 10 should be out of bounds since size is 10.
+			TS_ASSERT_THROWS(a[10], std::out_of_range);
+		}
+
+		void test10 () { //Testing the operator[] overload
+			Vector<unsigned int> a((size_t)10);
+			a[0] = (unsigned int)82;
+			a[5] = (unsigned int)99;
+			a[9] = (unsigned int)10005;
+			TS_ASSERT_EQUALS(a[0], 82);
+			TS_ASSERT_EQUALS(a[5], 99);
+			TS_ASSERT_EQUALS(a[9], 10005);
+			a.reset();
+			TS_ASSERT_EQUALS(a[0], 0);
+			TS_ASSERT_EQUALS(a[0], 0);
+			TS_ASSERT_EQUALS(a[0], 0);
+		}
+
+		void test11 () { //Testing the push_back member function.
+			Vector<unsigned int> a((size_t)10);
+			a[0] = (unsigned int)82;
+			a[9] = (unsigned int)10005;
+			TS_ASSERT_EQUALS(a[0], 82);
+			TS_ASSERT_EQUALS(a[9], 10005);
+			TS_ASSERT_THROWS(a[10], std::out_of_range);
+			a.push_back((unsigned int)1337);
+			TS_ASSERT_EQUALS(a[10], 1337);
+		}
+
 		void testX () { //Testing the operator[] overload
 			Vector<unsigned int> a((size_t)10);
 			a[0] = (unsigned int)82;

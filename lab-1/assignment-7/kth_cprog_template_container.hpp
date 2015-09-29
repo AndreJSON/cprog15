@@ -4,14 +4,14 @@
 template <typename T>
 class Vector {
 private:
-	void resize (size_t const&);
+	void resize ();
 	size_t backSize, frontSize;
 	T* array;
 
 public:
 	explicit Vector ();
 	explicit Vector (size_t);
-	explicit Vector (size_t, T const&);
+	explicit Vector (size_t, T const);
 	Vector (std::initializer_list<T>);
 	Vector (Vector const&);
 	Vector (Vector&&) noexcept;
@@ -20,6 +20,7 @@ public:
 	Vector& operator= (Vector&&);
 	T operator[] (size_t const&) const;
 	T& operator[] (size_t const&);
+	void push_back(T);
 	void reset ();
 	size_t size () const;
 };
@@ -43,7 +44,7 @@ Vector<T>::Vector (size_t size) {
 
 //Constructor taking a size parameter and a value.
 template <typename T>
-Vector<T>::Vector (size_t size, T const& value) {
+Vector<T>::Vector (size_t size, T const value) {
 	frontSize = size;
 	backSize = size;
 	array = (T*)malloc(sizeof(T) * backSize);
@@ -146,6 +147,14 @@ T& Vector<T>::operator[] (size_t const& index) {
 	} 
 }
 
+//Appends to specified element at the end of the vector.
+template <typename T>
+void Vector<T>::push_back (T value) {
+	if (frontSize == backSize)
+		resize();
+	array[frontSize++] = value;
+}
+
 //Resets all elements in the publicly seen part of the vector to be zero initialized.
 template <typename T>
 void Vector<T>::reset () {
@@ -160,14 +169,14 @@ size_t Vector<T>::size () const {
 	return frontSize;
 }
 
-
-//Called internally to increase the size of the vector enough to fit the index into it.
-/*template <typename T>
-void Vector<T>::resize(size_t const& index) {
-	if (index >= backSize) { //allocate double the space of index.
-		T* tmp = (T*)malloc(sizeof(T) * (index<<1)); //Might break if you try elements to a huge index (bigger the size of size_t).
-		
-	} else { //index must have been smaller than backSize but greater than frontSize.
-		frontSize = index;
+//Called internally to increase the size of the vector.
+template <typename T>
+void Vector<T>::resize() {
+	backSize = backSize<<1; //Double the size.
+	T* tmp = (T*)malloc(sizeof(T) * (backSize));
+	for (auto i = 0; i < frontSize; i++) {
+		tmp[i] = array[i];
 	}
-}*/
+	std::swap(array,tmp);
+	free(tmp);
+}
