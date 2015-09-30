@@ -18,10 +18,12 @@ public:
 	~Vector ();
 	Vector& operator= (Vector const&);
 	Vector& operator= (Vector&&);
-	T* begin () const;
-	T* end () const;
-	//find (T const&) const;
-	T operator[] (size_t) const;
+	T* begin ();
+	T const* begin () const;
+	T* end ();
+	T const* end () const;
+	T* find (T const&);
+	T const& operator[] (size_t) const;
 	T& operator[] (size_t);
 	void push_back(T);
 	void insert (size_t, T);
@@ -35,6 +37,8 @@ public:
 //Default constructor. Makes room for 10 elements.
 template <typename T>
 Vector<T>::Vector () {
+	static_assert(std::is_move_constructible<T>::value, "type was not move constructible.");
+	static_assert(std::is_move_assignable<T>::value, "type was not move assignable.");
 	frontSize = 0;
 	backSize = 10;
 	array = (T*)malloc(sizeof(T) * backSize);
@@ -43,6 +47,8 @@ Vector<T>::Vector () {
 //Constructor taking a size parameter.
 template <typename T>
 Vector<T>::Vector (size_t size) {
+	static_assert(std::is_move_constructible<T>::value, "type was not move constructible.");
+	static_assert(std::is_move_assignable<T>::value, "type was not move assignable.");
 	frontSize = size;
 	backSize = size;
 	array = (T*)malloc(sizeof(T) * backSize);
@@ -52,6 +58,8 @@ Vector<T>::Vector (size_t size) {
 //Constructor taking a size parameter and a value.
 template <typename T>
 Vector<T>::Vector (size_t size, T const value) {
+	static_assert(std::is_move_constructible<T>::value, "type was not move constructible.");
+	static_assert(std::is_move_assignable<T>::value, "type was not move assignable.");
 	frontSize = size;
 	backSize = size;
 	array = (T*)malloc(sizeof(T) * backSize);
@@ -63,6 +71,8 @@ Vector<T>::Vector (size_t size, T const value) {
 //Constructor taking an initializer_list.
 template <typename T>
 Vector<T>::Vector (std::initializer_list<T> il) {
+	static_assert(std::is_move_constructible<T>::value, "type was not move constructible.");
+	static_assert(std::is_move_assignable<T>::value, "type was not move assignable.");
 	frontSize = il.size();
 	backSize = frontSize;
 	array = (T*)malloc(sizeof(T) * backSize);
@@ -134,11 +144,43 @@ Vector<T>& Vector<T>::operator= (Vector<T>&& v) {
 	return *this;
 }
 
+//Pointer to the first element.
+template <typename T>
+T* Vector<T>::begin () {
+	return &array[0];
+}
 
+//Const pointer to the first element.
+template <typename T>
+T const* Vector<T>::begin () const{
+	return &array[0];
+}
+
+//Pointer to position right after the last element.
+template <typename T>
+T* Vector<T>::end () {
+	return &array[frontSize];
+}
+
+//Const pointer to position right after the last element.
+template <typename T>
+T const* Vector<T>::end () const{
+	return &array[frontSize];
+}
+
+//Returns a pointer to the first occurence of the specified value.
+template <typename T>
+T* Vector<T>::find (T const& value) {
+	for (auto i = begin(); i != end(); i++) {
+		if (*i = value)
+			return i;
+	}
+	return end();
+}
 
 //Operator [] overload (get value).
 template <typename T>
-T Vector<T>::operator[] (size_t index) const {
+T const& Vector<T>::operator[] (size_t index) const {
 	if (index < frontSize) {
 		return array[index];
 	} else {

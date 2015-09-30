@@ -109,7 +109,26 @@ class MyTestSuite : public CxxTest::TestSuite {
 			TS_ASSERT_EQUALS(c.size(), 10);
 		}
 
-		void test12 () { //Testing the operator[] overload on const objects.
+		void test9 () {
+			Vector<unsigned int> a((size_t)10);
+			auto count = 0;
+			for (auto i = a.begin(); i != a.end(); i++) {
+				count++;
+			}
+			TS_ASSERT_EQUALS(a.size(), count);
+		}
+
+		void test10 () { //Testing the find member function.
+			Vector<int> a((size_t)10);
+			a[0] = 13;
+			a[7] = 6;
+			a[9] = 1;
+			TS_ASSERT_EQUALS(a[0], 13);
+			TS_ASSERT_EQUALS(a[7], 6);
+			TS_ASSERT_EQUALS(a[9], 1);
+		}
+
+		void test11 () { //Testing the operator[] overload on const objects.
 			Vector<unsigned int> const a((size_t)10);
 			//First and last element should be accesible and equal to 0.
 			TS_ASSERT_EQUALS(a[0], 0);
@@ -118,7 +137,7 @@ class MyTestSuite : public CxxTest::TestSuite {
 			TS_ASSERT_THROWS(a[10], std::out_of_range);
 		}
 
-		void test13 () { //Testing the operator[] overload
+		void test12 () { //Testing the operator[] overload
 			Vector<unsigned int> a((size_t)10);
 			a[0] = (unsigned int)82;
 			a[5] = (unsigned int)99;
@@ -132,7 +151,7 @@ class MyTestSuite : public CxxTest::TestSuite {
 			TS_ASSERT_EQUALS(a[0], 0);
 		}
 
-		void test14 () { //Testing the push_back member function.
+		void test13 () { //Testing the push_back member function.
 			Vector<unsigned int> a((size_t)10);
 			a[0] = (unsigned int)82;
 			a[9] = (unsigned int)10005;
@@ -143,7 +162,7 @@ class MyTestSuite : public CxxTest::TestSuite {
 			TS_ASSERT_EQUALS(a[10], 1337);
 		}
 
-		void test15 () { //Testing the insert member function.
+		void test14 () { //Testing the insert member function.
 			Vector<int> a((size_t)10);
 			a[0] = 3;
 			a[5] = 7;
@@ -173,7 +192,7 @@ class MyTestSuite : public CxxTest::TestSuite {
 			TS_ASSERT_EQUALS(a.size(), 13);
 		}
 
-		void test16 () { //Testing the erase member function.
+		void test15 () { //Testing the erase member function.
 			Vector<int> a((size_t)10);
 			a[0] = 3;
 			a[1] = 5;
@@ -190,13 +209,13 @@ class MyTestSuite : public CxxTest::TestSuite {
 			TS_ASSERT_THROWS(b.erase(0), std::out_of_range);
 		}
 
-		void test17 () { //Testing clear.
+		void test16 () { //Testing clear.
 			Vector<int> a((size_t)10);
 			a.clear();
 			TS_ASSERT_THROWS(a[0], std::out_of_range);
 		}
 
-		void test18 () { //Testing reset.
+		void test17 () { //Testing reset.
 			Vector<int> a((size_t)10);
 			a[0] = 3;
 			a[9] = 6;
@@ -204,6 +223,39 @@ class MyTestSuite : public CxxTest::TestSuite {
 			TS_ASSERT_EQUALS(a[0], 0);
 			TS_ASSERT_EQUALS(a[9], 0);
 		}
+
+		void test18 () {
+			//Code copied from the lab directory, I'll deal with turning this into actual testcode later.
+			/*Vector<double> v;           // ok: defaultkonstruktor ger vektor med flyttal
+		    Vector<char> *a = new Vector<char>[3];  // dynamiskt allokerade ser ut så här
+		    delete [] a;
+
+		    assert(v.size() == 0);      // tom från början
+		    v.push_back(3.14);          // lägg till ett element sist 
+		    assert(v.size() == 1);      // nu ligger ett element i vektorn
+		    v.insert(0, 2.10);          // lägg till före element 0, dvs först
+		    assert(v[0] == 2.10 &&      // hamnade de rätt?
+			   v[1] == 3.14);       
+		    assert(v.size() == 2);      // nu ligger två element i vektorn
+		    v.sort(false);              // sortera i fallande ordning
+		    assert(v[0] == 3.14 &&      // hamnade de rätt?
+			   v[1] == 2.10);       
+		    assert(v.size() == 2);      // ingenting ändrat?
+		    v[1] = 2.11;                // tilldelning av enstaka element;
+
+		    const Vector<double> &vc = v;  // skapa konstant referens
+		    assert(vc.size() == 2);     // ok: ändrar ej vektorn som är konstant
+		    assert(vc[0] == 3.14 &&     // ok: ändrar ej vektorn som är konstant
+			   vc[1] == 2.11);
+		    
+		    v.erase(0);                 // ta bort första elementet               
+		    assert(v.size() == 1);      // rätt antal elelment
+		    v.clear();                  // töm hela vektorn
+		    assert(v.size() == 0);      // tom när alla element är borttagna
+		    
+		    
+		    // kontrollera att följande rader inte går att kompilera
+		    vc[0] = 3.1415;             // fel: tilldelning av konstant objekt
+		    Vector<char> c = v;         // fel: tilldelning av olika typer*/
+		}
 };
-
-
