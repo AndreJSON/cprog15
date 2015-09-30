@@ -18,11 +18,18 @@ public:
 	~Vector ();
 	Vector& operator= (Vector const&);
 	Vector& operator= (Vector&&);
-	T operator[] (size_t const&) const;
-	T& operator[] (size_t const&);
+	T* begin () const;
+	T* end () const;
+	//find (T const&) const;
+	T operator[] (size_t) const;
+	T& operator[] (size_t);
 	void push_back(T);
+	void insert (size_t, T);
+	void erase (size_t);
+	void clear ();
 	void reset ();
 	size_t size () const;
+	size_t capacity () const;
 };
 
 //Default constructor. Makes room for 10 elements.
@@ -127,9 +134,11 @@ Vector<T>& Vector<T>::operator= (Vector<T>&& v) {
 	return *this;
 }
 
+
+
 //Operator [] overload (get value).
 template <typename T>
-T Vector<T>::operator[] (size_t const& index) const {
+T Vector<T>::operator[] (size_t index) const {
 	if (index < frontSize) {
 		return array[index];
 	} else {
@@ -139,7 +148,7 @@ T Vector<T>::operator[] (size_t const& index) const {
 
 //Operator [] overload (set value).
 template <typename T>
-T& Vector<T>::operator[] (size_t const& index) {
+T& Vector<T>::operator[] (size_t index) {
 	if (index < frontSize) {
 		return array[index];
 	} else {
@@ -155,6 +164,40 @@ void Vector<T>::push_back (T value) {
 	array[frontSize++] = value;
 }
 
+//Inserts element T and the specified index. Throws std::out_of_range if trting to place element outside of vector.
+template <typename T>
+void Vector<T>::insert (size_t index, T value) {
+	if (index >= frontSize)
+		throw std::out_of_range("index out of bounds error.");
+	if (frontSize == backSize)
+		resize();
+	for (auto i = frontSize; i > index; i--) {
+		array[i] = array[i-1];
+	}
+	frontSize++;
+	array[index] = value;
+}
+
+//Erases elements at specified index.
+template <typename T>
+void Vector<T>::erase (size_t index) {
+	if (index >= frontSize)
+		throw std::out_of_range("index out of bounds error.");
+	for (auto i = index; i < frontSize-1; i++) {
+		array[i]  =array[i+1];
+	}
+	frontSize--;
+} 
+
+//Clears the vector of all elements leaving it at a size of 0.
+template <typename T>
+void Vector<T>::clear () {
+	frontSize = 0;
+	backSize = 10;
+	free(array);
+	array = (T*)malloc(sizeof(T) * (backSize));
+}
+
 //Resets all elements in the publicly seen part of the vector to be zero initialized.
 template <typename T>
 void Vector<T>::reset () {
@@ -167,6 +210,12 @@ void Vector<T>::reset () {
 template <typename T>
 size_t Vector<T>::size () const {
 	return frontSize;
+}
+
+//Gives the number of elements storeable in the Vector before it needs to reallocate a larger memory chunk.
+template <typename T>
+size_t Vector<T>::capacity () const {
+	return backSize;
 }
 
 //Called internally to increase the size of the vector.

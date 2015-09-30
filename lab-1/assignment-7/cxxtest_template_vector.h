@@ -109,7 +109,7 @@ class MyTestSuite : public CxxTest::TestSuite {
 			TS_ASSERT_EQUALS(c.size(), 10);
 		}
 
-		void test9 () { //Testing the operator[] overload on const objects.
+		void test12 () { //Testing the operator[] overload on const objects.
 			Vector<unsigned int> const a((size_t)10);
 			//First and last element should be accesible and equal to 0.
 			TS_ASSERT_EQUALS(a[0], 0);
@@ -118,7 +118,7 @@ class MyTestSuite : public CxxTest::TestSuite {
 			TS_ASSERT_THROWS(a[10], std::out_of_range);
 		}
 
-		void test10 () { //Testing the operator[] overload
+		void test13 () { //Testing the operator[] overload
 			Vector<unsigned int> a((size_t)10);
 			a[0] = (unsigned int)82;
 			a[5] = (unsigned int)99;
@@ -132,7 +132,7 @@ class MyTestSuite : public CxxTest::TestSuite {
 			TS_ASSERT_EQUALS(a[0], 0);
 		}
 
-		void test11 () { //Testing the push_back member function.
+		void test14 () { //Testing the push_back member function.
 			Vector<unsigned int> a((size_t)10);
 			a[0] = (unsigned int)82;
 			a[9] = (unsigned int)10005;
@@ -143,18 +143,66 @@ class MyTestSuite : public CxxTest::TestSuite {
 			TS_ASSERT_EQUALS(a[10], 1337);
 		}
 
-		void testX () { //Testing the operator[] overload
-			Vector<unsigned int> a((size_t)10);
-			a[0] = (unsigned int)82;
-			a[5] = (unsigned int)99;
-			a[9] = (unsigned int)10005;
-			TS_ASSERT_EQUALS(a[0], 82);
-			TS_ASSERT_EQUALS(a[5], 99);
-			TS_ASSERT_EQUALS(a[9], 10005);
+		void test15 () { //Testing the insert member function.
+			Vector<int> a((size_t)10);
+			a[0] = 3;
+			a[5] = 7;
+			a[9] = 6;
+			TS_ASSERT_THROWS(a[10], std::out_of_range);
+			TS_ASSERT_EQUALS(a.size(), 10);
+			a.insert(5,10);
+			TS_ASSERT_EQUALS(a[0], 3);
+			TS_ASSERT_EQUALS(a[5], 10);
+			TS_ASSERT_EQUALS(a[6], 7);
+			TS_ASSERT_EQUALS(a[10], 6);
+			TS_ASSERT_THROWS(a[11], std::out_of_range);
+			TS_ASSERT_EQUALS(a.size(), 11);
+			//Now try to insert at the last index.
+			a.insert(10,55);
+			TS_ASSERT_EQUALS(a[10], 55);
+			TS_ASSERT_EQUALS(a[11], 6);
+			TS_ASSERT_THROWS(a[12], std::out_of_range);
+			TS_ASSERT_EQUALS(a.size(), 12);
+			//Also insert at the first index.
+			a.insert(0,13);
+			TS_ASSERT_EQUALS(a[0], 13);
+			TS_ASSERT_EQUALS(a[1], 3);
+			TS_ASSERT_EQUALS(a.size(), 13);
+			//Now try to insert outside of the array.
+			TS_ASSERT_THROWS(a.insert(13, 67), std::out_of_range);
+			TS_ASSERT_EQUALS(a.size(), 13);
+		}
+
+		void test16 () { //Testing the erase member function.
+			Vector<int> a((size_t)10);
+			a[0] = 3;
+			a[1] = 5;
+			a[7] = 7;
+			a[8] = 1;
+			a[9] = 6;
+			a.erase(8);
+			a.erase(8);
+			a.erase(0);
+			TS_ASSERT_EQUALS(a.size(), 7);
+			TS_ASSERT_THROWS(a.erase(7), std::out_of_range);
+			TS_ASSERT_EQUALS(a[6], 7);
+			Vector<int> b;
+			TS_ASSERT_THROWS(b.erase(0), std::out_of_range);
+		}
+
+		void test17 () { //Testing clear.
+			Vector<int> a((size_t)10);
+			a.clear();
+			TS_ASSERT_THROWS(a[0], std::out_of_range);
+		}
+
+		void test18 () { //Testing reset.
+			Vector<int> a((size_t)10);
+			a[0] = 3;
+			a[9] = 6;
 			a.reset();
 			TS_ASSERT_EQUALS(a[0], 0);
-			TS_ASSERT_EQUALS(a[0], 0);
-			TS_ASSERT_EQUALS(a[0], 0);
+			TS_ASSERT_EQUALS(a[9], 0);
 		}
 };
 
