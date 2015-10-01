@@ -23,6 +23,7 @@ public:
 	T* end ();
 	T const* end () const;
 	T* find (T const&);
+	T const* find(T const&) const;
 	T const& operator[] (size_t) const;
 	T& operator[] (size_t);
 	void push_back(T);
@@ -172,7 +173,17 @@ T const* Vector<T>::end () const{
 template <typename T>
 T* Vector<T>::find (T const& value) {
 	for (auto i = begin(); i != end(); i++) {
-		if (*i = value)
+		if (*i == value)
+			return i;
+	}
+	return end();
+}
+
+//Returns a const pointer to the first occurence of the specified value.
+template <typename T>
+T const* Vector<T>::find(T const& value) const {
+	for (auto i = begin(); i != end(); i++) {
+		if (*i == value)
 			return i;
 	}
 	return end();

@@ -123,9 +123,10 @@ class MyTestSuite : public CxxTest::TestSuite {
 			a[0] = 13;
 			a[7] = 6;
 			a[9] = 1;
-			TS_ASSERT_EQUALS(a[0], 13);
-			TS_ASSERT_EQUALS(a[7], 6);
-			TS_ASSERT_EQUALS(a[9], 1);
+			TS_ASSERT_EQUALS(*(a.find(13)), 13);
+			TS_ASSERT_EQUALS(*(a.find(6)), 6);
+			TS_ASSERT_EQUALS(*(a.find(1)), 1);
+			TS_ASSERT_EQUALS(a.find(55), a.end());
 		}
 
 		void test11 () { //Testing the operator[] overload on const objects.
