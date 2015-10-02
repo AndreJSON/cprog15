@@ -237,7 +237,7 @@ void Vector<T>::erase (size_t index) {
 	if (index >= frontSize)
 		throw std::out_of_range("index out of bounds error.");
 	for (auto i = index; i < frontSize-1; i++) {
-		array[i]  =array[i+1];
+		array[i]  = array[i+1];
 	}
 	frontSize--;
 } 

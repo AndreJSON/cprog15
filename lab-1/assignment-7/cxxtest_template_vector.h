@@ -11,6 +11,10 @@ class MyTestSuite : public CxxTest::TestSuite {
 		void test2 () { //Testing the size_t constructor.
 			Vector<char> a((size_t)17);
 			TS_ASSERT_EQUALS(a.size(), 17);
+			TS_ASSERT_EQUALS(a[0], (char)0);
+			TS_ASSERT_EQUALS(a[5], (char)0);
+			TS_ASSERT_EQUALS(a[16], (char)0);
+			Vector<Vector<int>> b((size_t)10);
 		}
 
 		void test3 () { //Testing the (size_t, value) constructor.
