@@ -211,6 +211,16 @@ public:
 		//Now try to insert outside of the array.
 		TS_ASSERT_THROWS(a.insert(15, 67), std::out_of_range);
 		TS_ASSERT_EQUALS(a.size(), 14);
+
+		Vector<int> b((size_t)0);
+		b.insert(0, 1);
+		TS_ASSERT_EQUALS(b[0], 1);
+		TS_ASSERT_EQUALS(b.size(), 1);
+		b.reset();
+		TS_ASSERT_EQUALS(b.size(), 1);
+		b.insert(0, 55);
+		TS_ASSERT_EQUALS(b[0], 55);
+		TS_ASSERT_EQUALS(b.size(), 2);
 	}
 
 	void test15 () { //Testing the erase member function.

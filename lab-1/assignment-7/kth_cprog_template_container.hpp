@@ -42,7 +42,7 @@ public:
 template <class T>
 Vector<T>::Vector () {
 	frontSize = 0;
-	backSize = 10;
+	backSize = 0;
 	array = new T[backSize];
 }
 
@@ -237,11 +237,10 @@ void Vector<T>::erase (size_t index) {
 	frontSize--;
 } 
 
-//Clears the vector of all elements leaving it at a size of 0.
+//Clears the vector of all elements leaving it at visible size of 0.
 template <class T>
 void Vector<T>::clear () {
 	frontSize = 0;
-	//backSize = 10;
 	delete[] array;
 	array = new T[backSize];
 }
@@ -269,6 +268,7 @@ size_t Vector<T>::capacity () const {
 //Called internally to increase the size of the vector.
 template <class T>
 void Vector<T>::resize() {
+	backSize++; //To make sure it is greater than 0, otherwise doubling it will still keep it a 0 size.
 	backSize = backSize<<1; //Double the size.
 	T* tmp = new T[backSize];
 	for (auto i = 0; i < frontSize; i++) {
