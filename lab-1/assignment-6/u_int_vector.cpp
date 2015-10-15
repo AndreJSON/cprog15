@@ -88,7 +88,7 @@ unsigned int UIntVector::operator[] (size_t const& index) const {
 }
 
 //Operator [] overload (set value).
-unsigned int& UIntVector::operator[] (size_t const& index) { //May be wrong. I just guessed my way to this.
+unsigned int& UIntVector::operator[] (size_t const& index) {
 	if (index < frontSize) {
 		return array[index];
 	} else {
@@ -107,13 +107,3 @@ void UIntVector::reset () {
 size_t UIntVector::size () const {
 	return frontSize;
 }
-
-//Called internally to increase the size of the vector enough to fit the index into it.
-/*void UIntVector::resize(size_t const& index) {
-	if (index >= backSize) { //allocate double the space of index.
-		unsigned int * tmp = (unsigned int*)malloc(sizeof(unsigned int) * (index<<1)); //Might break if you try elements to a huge index (bigger the size of size_t).
-		
-	} else { //index must have been smaller than backSize but greater than frontSize.
-		frontSize = index;
-	}
-}*/
