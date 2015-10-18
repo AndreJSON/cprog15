@@ -1,6 +1,6 @@
-#include "date.cpp"
-#include "julian.cpp"
-#include "kattistime.cpp"
+#include "date.hpp"
+#include "julian.hpp"
+#include "kattistime.h"
 
 using namespace lab2;
 

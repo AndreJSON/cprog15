@@ -2,12 +2,12 @@
 
 runner: julian
 	cxxtestgen --error-printer -o runner.cpp cxxtest_date.h
-	g++ -std=c++11 -Wall -Wextra -o runner.out runner.cpp
+	g++ -std=c++11 -Wall -Wextra -o runner.out runner.cpp kattistime.o date.o julian.o
 	@echo "..........Runner was successfully compiled!"
 	@echo ""
 
 kattistime:
-	g++ -std=c++11 -Wall -Wextra -c kattistime.cpp
+	g++ -std=c++11 -Wall -Wextra -c kattistime.cpp -o kattistime.o
 	@echo "..........Kattistime was successfully compiled!"
 	@echo ""
 
