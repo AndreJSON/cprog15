@@ -8,7 +8,10 @@ class MyTestSuite : public CxxTest::TestSuite {
 public:
 
 	void test1 () {
+		time_t tp;
+		time(&tp);
+		set_k_time(tp);
 		Julian d;
-		std::cout << d.mod_julian_day() << std::endl;
+		std::cout << d.early_julian_day() << std::endl;
 	}
 };

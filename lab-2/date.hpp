@@ -5,12 +5,17 @@
 #ifndef DATE_HPP
 #define DATE_HPP
 
+
+/*
+* Dates from the first of march year 0 are ok.
+*/
 namespace lab2 {
 	class Date {
 	protected:
 		int ejd; //Early Julian Day.
 		std::vector<std::string> week_day_names = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
 		std::vector<std::string> month_names = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+		std::vector<int> month_lengths = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 	public:
 		Date();
 		~Date();
@@ -25,6 +30,7 @@ namespace lab2 {
 		virtual void add_year(int) = 0;
 		virtual void add_month(int) = 0;
 		int mod_julian_day() const;
+		int early_julian_day() const;
 	};
 }
 
