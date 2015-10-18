@@ -1,24 +1,31 @@
 #include <string>
+#include <vector>
+#include <iostream>
+#include "kattistime.h"
+#ifndef DATE_HPP
+#define DATE_HPP
 
 namespace lab2 {
 	class Date {
 	protected:
 		int ejd; //Early Julian Day.
-		std::string day_names[] = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
-		std::string month_names[] = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-		//virtual int is_leap_year(some type) = 0; not fully sure what should be passed here. I will settle that later.
+		std::vector<std::string> week_day_names = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+		std::vector<std::string> month_names = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
 	public:
-		virtual Date () = 0;
-		virtual int year() = 0;
-		virtual unsigned int month() = 0;
-		virtual unsigned int day() = 0;
-		virtual unsigned int week_day() = 0;
-		virtual unsigned int days_per_week() = 0;
-		virtual unsigned int days_this_month() = 0;
-		virtual std::string week_day_name() = 0;
-		virtual std::string month_name() = 0;
+		Date();
+		~Date();
+		virtual int year() const = 0;
+		virtual unsigned int month() const = 0;
+		virtual unsigned int day() const = 0;
+		virtual unsigned int week_day() const = 0;
+		virtual unsigned int days_per_week() const = 0;
+		virtual unsigned int days_this_month() const = 0;	
+		virtual std::string week_day_name() const;			//Shouldn't be overridden unless there is good reason to.
+		virtual std::string month_name() const;				//Shouldn't be overridden unless there is good reason to.
 		virtual void add_year(int) = 0;
 		virtual void add_month(int) = 0;
-		virtual int mod_julian_day() = 0;
+		int mod_julian_day() const;
 	};
 }
+
+#endif /*DATE_HPP */
