@@ -13,10 +13,6 @@ unsigned int lab2::Julian::day() const {
 	return 0;
 }
 
-unsigned int lab2::Julian::week_day() const {
-	return 0;
-}
-
 unsigned int lab2::Julian::days_per_week() const {
 	return 7;
 }

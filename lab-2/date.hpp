@@ -11,6 +11,8 @@
 */
 namespace lab2 {
 	class Date {
+	private:
+		int fjd = 1721060; //first julian day covered by this calendar, 1st of January year 0 in the Gregorian calendar.
 	protected:
 		int ejd; //Early Julian Day.
 		std::vector<std::string> week_day_names = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
@@ -22,7 +24,7 @@ namespace lab2 {
 		virtual int year() const = 0;
 		virtual unsigned int month() const = 0;
 		virtual unsigned int day() const = 0;
-		virtual unsigned int week_day() const = 0;
+		virtual unsigned int week_day() const;
 		virtual unsigned int days_per_week() const = 0;
 		virtual unsigned int days_this_month() const = 0;	
 		virtual std::string week_day_name() const;			//Shouldn't be overridden unless there is good reason to.

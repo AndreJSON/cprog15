@@ -9,14 +9,18 @@ lab2::Date::Date() {
     int day   = t->tm_mday;
 
     //TODO: CHECK IF INPUT IS OK, ELSE ALGORITHM MIGHT CRASH.
-	ejd = 1721060; //ejd for January 1st year 0 in the gregorian calendar.
+	ejd = fjd;
 	while(year >= 400) {
 		year -= 400;
 		ejd += 97 * 366 + 303 * 365;
 	}
+	while(year >= 100) {
+		year -= 100;
+		ejd += 24 * 366 + 76 * 365;
+	}
 	while(year >= 4) {
 		year -= 4;
-		ejd += 365 * 3 + 366;
+		ejd +=  366 + 3 * 365;
 	}
 	while(year >= 1) {
 		year --;
@@ -30,6 +34,10 @@ lab2::Date::Date() {
 }
 
 lab2::Date::~Date() {
+}
+
+unsigned int lab2::Date::week_day() const {
+	return (ejd - fjd + 5) % days_per_week() + 1; //5 is added because fjd is a saturday. 1 is added because the specification call for 1..n indexing of the days.
 }
 
 std::string lab2::Date::week_day_name() const {

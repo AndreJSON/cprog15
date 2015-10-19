@@ -7,11 +7,37 @@ using namespace lab2;
 class MyTestSuite : public CxxTest::TestSuite {
 public:
 
-	void test1 () {
-		time_t tp;
-		time(&tp);
-		set_k_time(tp);
-		Julian d;
-		std::cout << d.early_julian_day() << std::endl;
+	void test1 () { //Not really a test, just writing out todays date. Check manually if this is indeeed todays date.
+		time_t t;
+		time(&t);
+		set_k_time(t);
+		Julian j;
+		std::cout << " Today's Julian date is: " << j << " ";
+	}
+
+	void test2 () { //Testing a few dates.
+		time_t t = 1445243911;
+		set_k_time(t);
+		Julian j1;
+		TS_ASSERT_EQUALS(j1.early_julian_day(), 2457315);
+		TS_ASSERT_EQUALS(j1.mod_julian_day(), 57315);
+		TS_ASSERT_EQUALS(j1.week_day(), 1)
+		TS_ASSERT_EQUALS(j1.week_day_name(), "Monday")
+
+		t -= 86400;
+		set_k_time(t);
+		Julian j2;
+		TS_ASSERT_EQUALS(j2.early_julian_day(), 2457314);
+		TS_ASSERT_EQUALS(j2.mod_julian_day(), 57314);
+		TS_ASSERT_EQUALS(j2.week_day(), 7)
+		TS_ASSERT_EQUALS(j2.week_day_name(), "Sunday")
+
+		t = 0;
+		set_k_time(t);
+		Julian j3;
+		TS_ASSERT_EQUALS(j3.early_julian_day(), 2440588);
+		TS_ASSERT_EQUALS(j3.mod_julian_day(), 40588);
+		TS_ASSERT_EQUALS(j3.week_day(), 4)
+		TS_ASSERT_EQUALS(j3.week_day_name(), "Thursday")
 	}
 };
