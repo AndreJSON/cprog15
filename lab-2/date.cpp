@@ -36,6 +36,22 @@ lab2::Date::Date() {
 lab2::Date::~Date() {
 }
 
+int lab2::Date::year() const {
+	int year = 0, tmp = fjd;
+	while(true) {
+		if(tmp + (int)days_in_year(year) <= ejd) {
+			tmp += (int)days_in_year(year);
+			year++;
+		} else
+			break;
+	}
+	return year;
+}
+
+unsigned int lab2::Date::days_in_year(int year) const {
+	return 365 + (is_leap_year(year)? 1:0);
+}
+
 unsigned int lab2::Date::week_day() const {
 	return (ejd - fjd + 5) % days_per_week() + 1; //5 is added because fjd is a saturday. 1 is added because the specification call for 1..n indexing of the days.
 }

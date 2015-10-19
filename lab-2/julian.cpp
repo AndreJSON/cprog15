@@ -1,10 +1,6 @@
 #include "julian.hpp"
 
 
-int lab2::Julian::year() const {
-	return 0;
-}
-
 unsigned int lab2::Julian::month() const {
 	return 0;
 }

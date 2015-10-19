@@ -9,12 +9,12 @@
 /*
 * Dates from the first of march year 0 are ok.
 *
-* There are unfirtunately a bunch of stupid constraints to the lab-task that prevents this abstract class from being written in a general and extendible way.
+* There are unfortunately a bunch of stupid constraints to the lab-task that prevents this abstract class from being written in a general and highly extensible way.
 */
 namespace lab2 {
 	class Date {
 	private:
-		int fjd = 1721060; //first julian day expressed in julian days, 1st of January year 0 in the Gregorian calendar.
+		int fjd = 1721060; //1st of January year 0 in the Gregorian calendar expressed in julian days.
 	protected:
 		int ejd; //Early Julian Day.
 		std::vector<std::string> week_day_names = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
@@ -23,14 +23,15 @@ namespace lab2 {
 	public:
 		Date();
 		~Date();
-		virtual int year() const = 0;
+		int year() const;
 		virtual unsigned int month() const = 0;
 		virtual unsigned int day() const = 0;
-		virtual unsigned int week_day() const;				//Shouldn't be overridden unless there is good reason to.
+		unsigned int week_day() const;
 		virtual unsigned int days_per_week() const = 0;
-		virtual unsigned int days_this_month() const = 0;	
-		virtual std::string week_day_name() const;			//Shouldn't be overridden unless there is good reason to.
-		virtual std::string month_name() const;				//Shouldn't be overridden unless there is good reason to.
+		virtual unsigned int days_this_month() const = 0;
+		unsigned int days_in_year(int) const;	
+		std::string week_day_name() const;
+		std::string month_name() const;
 		virtual void add_year(int) = 0;
 		virtual void add_month(int) = 0;
 		virtual bool is_leap_year(int) const = 0;

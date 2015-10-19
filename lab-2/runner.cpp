@@ -41,15 +41,27 @@ public:
 
 static class TestDescription_suite_MyTestSuite_test3 : public CxxTest::RealTestDescription {
 public:
- TestDescription_suite_MyTestSuite_test3() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 28, "test3" ) {}
+ TestDescription_suite_MyTestSuite_test3() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 29, "test3" ) {}
  void runTest() { suite_MyTestSuite.test3(); }
 } testDescription_suite_MyTestSuite_test3;
 
 static class TestDescription_suite_MyTestSuite_test4 : public CxxTest::RealTestDescription {
 public:
- TestDescription_suite_MyTestSuite_test4() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 38, "test4" ) {}
+ TestDescription_suite_MyTestSuite_test4() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 40, "test4" ) {}
  void runTest() { suite_MyTestSuite.test4(); }
 } testDescription_suite_MyTestSuite_test4;
+
+static class TestDescription_suite_MyTestSuite_test5 : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_MyTestSuite_test5() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 51, "test5" ) {}
+ void runTest() { suite_MyTestSuite.test5(); }
+} testDescription_suite_MyTestSuite_test5;
+
+static class TestDescription_suite_MyTestSuite_testX : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_MyTestSuite_testX() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 62, "testX" ) {}
+ void runTest() { suite_MyTestSuite.testX(); }
+} testDescription_suite_MyTestSuite_testX;
 
 #include <cxxtest/Root.cpp>
 const char* CxxTest::RealWorldDescription::_worldName = "cxxtest";

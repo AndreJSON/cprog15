@@ -5,7 +5,6 @@
 namespace lab2 {
 	class Julian : public Date {
 	public:
-		int year() const override;
 		unsigned int month() const override;
 		unsigned int day() const override;
 		unsigned int days_per_week() const override;
