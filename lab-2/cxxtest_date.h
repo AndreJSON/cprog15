@@ -15,29 +15,33 @@ public:
 		std::cout << " Today's Julian date is: " << j << " ";
 	}
 
-	void test2 () { //Testing a few dates.
+	void test2 () { //Testing all implemented funtions on a date.
 		time_t t = 1445243911;
 		set_k_time(t);
-		Julian j1;
-		TS_ASSERT_EQUALS(j1.early_julian_day(), 2457315);
-		TS_ASSERT_EQUALS(j1.mod_julian_day(), 57315);
-		TS_ASSERT_EQUALS(j1.week_day(), 1)
-		TS_ASSERT_EQUALS(j1.week_day_name(), "Monday")
+		Julian j;
+		TS_ASSERT_EQUALS(j.early_julian_day(), 2457315);
+		TS_ASSERT_EQUALS(j.mod_julian_day(), 57315);
+		TS_ASSERT_EQUALS(j.week_day(), 1);
+		TS_ASSERT_EQUALS(j.week_day_name(), "Monday");
+	}
 
-		t -= 86400;
+	void test3 () {
+		time_t t = 1445243911 - 86400;
 		set_k_time(t);
-		Julian j2;
-		TS_ASSERT_EQUALS(j2.early_julian_day(), 2457314);
-		TS_ASSERT_EQUALS(j2.mod_julian_day(), 57314);
-		TS_ASSERT_EQUALS(j2.week_day(), 7)
-		TS_ASSERT_EQUALS(j2.week_day_name(), "Sunday")
+		Julian j;
+		TS_ASSERT_EQUALS(j.early_julian_day(), 2457314);
+		TS_ASSERT_EQUALS(j.mod_julian_day(), 57314);
+		TS_ASSERT_EQUALS(j.week_day(), 7);
+		TS_ASSERT_EQUALS(j.week_day_name(), "Sunday");
+	}
 
-		t = 0;
+	void test4 () {
+		time_t t = 0;
 		set_k_time(t);
-		Julian j3;
-		TS_ASSERT_EQUALS(j3.early_julian_day(), 2440588);
-		TS_ASSERT_EQUALS(j3.mod_julian_day(), 40588);
-		TS_ASSERT_EQUALS(j3.week_day(), 4)
-		TS_ASSERT_EQUALS(j3.week_day_name(), "Thursday")
+		Julian j;
+		TS_ASSERT_EQUALS(j.early_julian_day(), 2440588);
+		TS_ASSERT_EQUALS(j.mod_julian_day(), 40588);
+		TS_ASSERT_EQUALS(j.week_day(), 4);
+		TS_ASSERT_EQUALS(j.week_day_name(), "Thursday");
 	}
 };
