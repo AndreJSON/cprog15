@@ -37,23 +37,55 @@ lab2::Date::~Date() {
 }
 
 int lab2::Date::year() const {
-	int year = 0, tmp = fjd;
+	if(cd.ejd != ejd)
+		calculate_date();
+	return cd.year;
+}
+
+unsigned int lab2::Date::month() const {
+	if(cd.ejd != ejd)
+		calculate_date();
+	return cd.month;
+}
+
+unsigned int lab2::Date::day() const {
+	if(cd.ejd != ejd)
+		calculate_date();
+	return cd.day;
+}
+
+void lab2::Date::calculate_date() const {
+	cd.ejd = cd.year = 0;
+	cd.day = cd.month = 1;
 	while(true) {
-		if(tmp + (int)days_in_year(year) <= ejd) {
-			tmp += (int)days_in_year(year);
-			year++;
+		if(cd.ejd + (int)days_in_year(cd.year) <= ejd) {
+			cd.ejd += (int)days_in_year(cd.year);
+			cd.year++;
 		} else
 			break;
 	}
-	return year;
-}
-
-unsigned int lab2::Date::days_in_year(int year) const {
-	return 365 + (is_leap_year(year)? 1:0);
+	while(true) {
+		if(cd.ejd + (int)days_in_month(cd.month, cd.year) <= ejd) {
+			cd.ejd += (int)days_in_month(cd.month, cd.year);
+			cd.month++;
+		} else
+			break;
+	}
+	cd.day += ejd - cd.ejd;
+	cd.ejd += cd.day - 1;
+	std::cout << cd.ejd << " " << ejd;
 }
 
 unsigned int lab2::Date::week_day() const {
 	return (ejd - fjd + 5) % days_per_week() + 1; //5 is added because fjd is a saturday. 1 is added because the specification call for 1..n indexing of the days.
+}
+
+unsigned int lab2::Date::days_this_month() const {
+	return days_in_month(month(), year());
+}
+
+unsigned int lab2::Date::days_in_year(int year) const {
+	return 365 + (is_leap_year(year)? 1:0);
 }
 
 std::string lab2::Date::week_day_name() const {

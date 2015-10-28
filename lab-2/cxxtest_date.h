@@ -26,7 +26,7 @@ public:
 		TS_ASSERT_EQUALS(j.year(), 2015);
 	}
 
-	void test3 () {
+	void test3 () { //Testing all implemented funtions on a date.
 		time_t t = 1445243911 - 86400;
 		set_k_time(t);
 		Julian j;
@@ -37,7 +37,7 @@ public:
 		TS_ASSERT_EQUALS(j.year(), 2015);
 	}
 
-	void test4 () {
+	void test4 () { //Testing all implemented funtions on a date.
 		time_t t = 0;
 		set_k_time(t);
 		Julian j;
@@ -48,7 +48,7 @@ public:
 		TS_ASSERT_EQUALS(j.year(), 1970);
 	}
 
-	void test5 () {
+	void test5 () { //Testing all implemented funtions on a date.
 		time_t t = 1445243911 + 7000 * 86400;
 		set_k_time(t);
 		Julian j;
@@ -59,7 +59,7 @@ public:
 		TS_ASSERT_EQUALS(j.year(), 2034);
 	}
 
-	void testX () {
+	void testX () { //Testing a bunch of years with the leap year function.
 		Julian j;
 		TS_ASSERT_EQUALS(j.is_leap_year(0), true);
 		TS_ASSERT_EQUALS(j.is_leap_year(1), false);
