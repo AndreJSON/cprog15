@@ -41,7 +41,7 @@ namespace lab2 {
 		unsigned int month() const;
 		unsigned int day() const;
 		unsigned int week_day() const;
-		virtual unsigned int days_per_week() const = 0;
+		unsigned int days_per_week() const;
 		unsigned int days_this_month() const;
 		virtual unsigned int days_in_month(int, int) const = 0;
 		unsigned int days_in_year(int) const;	

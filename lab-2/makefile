@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := runner
 
-runner: julian
+runner: julian kattistime
 	cxxtestgen --error-printer -o runner.cpp cxxtest_date.h
 	g++ -std=c++11 -Wall -Wextra -o runner.out runner.cpp kattistime.o date.o julian.o
 	@echo "..........Runner was successfully compiled!"
@@ -20,3 +20,6 @@ julian: date
 	g++ -std=c++11 -Wall -Wextra -c julian.cpp -o julian.o
 	@echo "..........Julian was successfully compiled!"
 	@echo ""
+
+clean:
+	rm -f *.o *.out

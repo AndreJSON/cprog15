@@ -1,10 +1,6 @@
 #include "julian.hpp"
 
 
-unsigned int lab2::Julian::days_per_week() const {
-	return 7;
-}
-
 unsigned int lab2::Julian::days_in_month(int month, int year) const {
 	return month_lengths.at(month-1) + (month == 2 && is_leap_year(year))? 1:0;
 }
@@ -21,7 +17,38 @@ bool lab2::Julian::is_leap_year(int year) const {
 }
 
 void lab2::Julian::add_year(int n) {
-	std::cout << n << std::endl;
+	unsigned int d = day();
+	unsigned int m = month();
+	int y = year();
+	while (n > 0) {
+		ejd += days_in_year(y);
+		n--;
+		y++;
+	}
+	if(d == day())
+		return;
+	if(m == 2 && d == 29) {
+		ejd--;
+		return;
+	}
+	if(month() > m) {
+		ejd--;
+		return;
+	}
+	if(month() < m) {
+		ejd++;
+		return;
+	}
+	if(day() > d) {
+		ejd--;
+		return;
+	}
+	if(day() > d) {
+		ejd++;
+		return;
+	}
+	std::cerr << "IF THIS PRINTS, SOMETHING HAS GONE TERRIBLY WRONG IN ADD_YEAR";
+	return;
 }
 
 void lab2::Julian::add_month(int n) {

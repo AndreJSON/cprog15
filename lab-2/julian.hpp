@@ -5,7 +5,6 @@
 namespace lab2 {
 	class Julian : public Date {
 	public:
-		unsigned int days_per_week() const override;
 		unsigned int days_in_month(int, int) const override;
 		bool is_leap_year(int) const override;
 		void add_year(int) override;
