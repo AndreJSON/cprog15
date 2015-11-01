@@ -55,7 +55,6 @@ void lab2::Date::calculate_date() const {
 	}
 	cd.day += ejd - cd.ejd;
 	cd.ejd += cd.day - 1;
-	std::cout << cd.ejd << " " << ejd;
 }
 
 int lab2::Date::year() const {

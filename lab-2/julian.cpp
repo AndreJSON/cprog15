@@ -2,7 +2,7 @@
 
 
 unsigned int lab2::Julian::days_in_month(int month, int year) const {
-	return month_lengths.at(month-1) + (month == 2 && is_leap_year(year))? 1:0;
+	return month_lengths.at(month-1) + ((month == 2 && is_leap_year(year))? 1:0);
 }
 
 bool lab2::Julian::is_leap_year(int year) const {
