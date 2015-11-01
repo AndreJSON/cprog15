@@ -37,7 +37,8 @@ lab2::Date::~Date() {
 }
 
 void lab2::Date::calculate_date() const {
-	cd.ejd = cd.year = 0;
+	cd.ejd = fjd;
+	cd.year = 0;
 	cd.day = cd.month = 1;
 	while(true) {
 		if(cd.ejd + (int)days_in_year(cd.year) <= ejd) {

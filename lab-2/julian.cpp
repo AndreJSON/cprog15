@@ -1,6 +1,9 @@
 #include "julian.hpp"
 
 
+lab2::Julian::~Julian (){
+}
+
 unsigned int lab2::Julian::days_in_month(int month, int year) const {
 	return month_lengths.at(month-1) + ((month == 2 && is_leap_year(year))? 1:0);
 }

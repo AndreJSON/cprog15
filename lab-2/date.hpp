@@ -36,7 +36,7 @@ namespace lab2 {
 		std::vector<int> month_lengths = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 	public:
 		Date();
-		~Date();
+		virtual ~Date();
 		int year() const;
 		unsigned int month() const;
 		unsigned int day() const;

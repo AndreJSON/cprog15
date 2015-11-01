@@ -55,20 +55,32 @@ public:
 	}
 
 	void test4 () { //Testing the year class-member function in Julian.
-		Julian j;
+		Julian* j;
 		time_t t;
+
 		t = 1445243911;
 		set_k_time(t);
-		TS_ASSERT_EQUALS(j.year(), 2015);
+		j = new Julian();
+		TS_ASSERT_EQUALS((*j).year(), 2015);
+		delete j;
+
 		t = 1445243911 - 86400;
 		set_k_time(t);
-		TS_ASSERT_EQUALS(j.year(), 2015);
+		j = new Julian();
+		TS_ASSERT_EQUALS((*j).year(), 2015);
+		delete j;
+
 		t = 0;
 		set_k_time(t);
-		TS_ASSERT_EQUALS(j.year(), 1970);
+		j = new Julian();
+		TS_ASSERT_EQUALS((*j).year(), 1970);
+		delete j;
+
 		t = 1445243911 + 7000 * 86400;
 		set_k_time(t);
-		TS_ASSERT_EQUALS(j.year(), 2034);
+		j = new Julian();
+		TS_ASSERT_EQUALS((*j).year(), 2034);
+		delete j;
 	}
 
 	void testX1 () { //Testing all implemented funtions on a date.
