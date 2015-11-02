@@ -83,6 +83,68 @@ public:
 		delete j;
 	}
 
+	//Needs further testing when more operators are implemented.
+	void test5 () { //Testing add_year in Julian.
+		time_t t = 0;
+		set_k_time(t);
+		Julian j;
+		int y = 1970;
+		unsigned int m = 1;
+		unsigned int d = 1;
+
+		j.add_year(0);
+		TS_ASSERT_EQUALS(j.year(), y);
+		TS_ASSERT_EQUALS(j.month(), m);
+		TS_ASSERT_EQUALS(j.day(), d);
+
+		j.add_year(1);
+		y++;
+		TS_ASSERT_EQUALS(j.year(), y);
+		TS_ASSERT_EQUALS(j.month(), m);
+		TS_ASSERT_EQUALS(j.day(), d);
+
+		j.add_year(100);
+		y+=100;
+		TS_ASSERT_EQUALS(j.year(), y);
+		TS_ASSERT_EQUALS(j.month(), m);
+		TS_ASSERT_EQUALS(j.day(), d);
+	}
+
+	//Needs further testing when more operators are implemented.
+	void test6 () { //Testing add_month in Julian.
+		time_t t = 0;
+		set_k_time(t);
+		Julian j;
+		int y = 1970;
+		unsigned int m = 1;
+		unsigned int d = 1;
+
+		j.add_month(0);
+		TS_ASSERT_EQUALS(j.year(), y);
+		TS_ASSERT_EQUALS(j.month(), m);
+		TS_ASSERT_EQUALS(j.day(), d);
+
+		j.add_month(1);
+		m++;
+		TS_ASSERT_EQUALS(j.year(), y);
+		TS_ASSERT_EQUALS(j.month(), m);
+		TS_ASSERT_EQUALS(j.day(), d);
+
+		j.add_month(13);
+		y++;
+		m++;
+		TS_ASSERT_EQUALS(j.year(), y);
+		TS_ASSERT_EQUALS(j.month(), m);
+		TS_ASSERT_EQUALS(j.day(), d);
+
+		j.add_month(121);
+		y+=10;
+		m++;
+		TS_ASSERT_EQUALS(j.year(), y);
+		TS_ASSERT_EQUALS(j.month(), m);
+		TS_ASSERT_EQUALS(j.day(), d);
+	}
+
 	void testX1 () { //Testing all implemented funtions on a date.
 		time_t t = 1445243911;
 		set_k_time(t);

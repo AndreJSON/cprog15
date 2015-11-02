@@ -58,7 +58,7 @@ void lab2::Julian::add_month(int n) {
 	unsigned int d = day();
 	unsigned int m = month();
 	if (n > 12) {
-		add_year(n - (n%12));
+		add_year( (n-(n%12)) /12 );
 		n = n%12;
 	}
 	while((m+n)%12 != month()) {

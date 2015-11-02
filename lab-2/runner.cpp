@@ -57,33 +57,45 @@ public:
  void runTest() { suite_MyTestSuite.test4(); }
 } testDescription_suite_MyTestSuite_test4;
 
+static class TestDescription_suite_MyTestSuite_test5 : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_MyTestSuite_test5() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 87, "test5" ) {}
+ void runTest() { suite_MyTestSuite.test5(); }
+} testDescription_suite_MyTestSuite_test5;
+
+static class TestDescription_suite_MyTestSuite_test6 : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_MyTestSuite_test6() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 114, "test6" ) {}
+ void runTest() { suite_MyTestSuite.test6(); }
+} testDescription_suite_MyTestSuite_test6;
+
 static class TestDescription_suite_MyTestSuite_testX1 : public CxxTest::RealTestDescription {
 public:
- TestDescription_suite_MyTestSuite_testX1() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 86, "testX1" ) {}
+ TestDescription_suite_MyTestSuite_testX1() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 148, "testX1" ) {}
  void runTest() { suite_MyTestSuite.testX1(); }
 } testDescription_suite_MyTestSuite_testX1;
 
 static class TestDescription_suite_MyTestSuite_testX2 : public CxxTest::RealTestDescription {
 public:
- TestDescription_suite_MyTestSuite_testX2() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 97, "testX2" ) {}
+ TestDescription_suite_MyTestSuite_testX2() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 159, "testX2" ) {}
  void runTest() { suite_MyTestSuite.testX2(); }
 } testDescription_suite_MyTestSuite_testX2;
 
 static class TestDescription_suite_MyTestSuite_testX3 : public CxxTest::RealTestDescription {
 public:
- TestDescription_suite_MyTestSuite_testX3() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 108, "testX3" ) {}
+ TestDescription_suite_MyTestSuite_testX3() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 170, "testX3" ) {}
  void runTest() { suite_MyTestSuite.testX3(); }
 } testDescription_suite_MyTestSuite_testX3;
 
 static class TestDescription_suite_MyTestSuite_testX4 : public CxxTest::RealTestDescription {
 public:
- TestDescription_suite_MyTestSuite_testX4() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 119, "testX4" ) {}
+ TestDescription_suite_MyTestSuite_testX4() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 181, "testX4" ) {}
  void runTest() { suite_MyTestSuite.testX4(); }
 } testDescription_suite_MyTestSuite_testX4;
 
 static class TestDescription_suite_MyTestSuite_testTodaysDate : public CxxTest::RealTestDescription {
 public:
- TestDescription_suite_MyTestSuite_testTodaysDate() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 130, "testTodaysDate" ) {}
+ TestDescription_suite_MyTestSuite_testTodaysDate() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 192, "testTodaysDate" ) {}
  void runTest() { suite_MyTestSuite.testTodaysDate(); }
 } testDescription_suite_MyTestSuite_testTodaysDate;
 
