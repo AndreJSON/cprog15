@@ -55,5 +55,18 @@ void lab2::Julian::add_year(int n) {
 }
 
 void lab2::Julian::add_month(int n) {
-	std::cout << n << std::endl;
+	unsigned int d = day();
+	unsigned int m = month();
+	if (n > 12) {
+		add_year(n - (n%12));
+		n = n%12;
+	}
+	while((m+n)%12 != month()) {
+		ejd+=27;
+	}
+	if(days_in_month(month(), year()) >= d) {
+		ejd += (int)d - (int)day();
+	} else {
+		ejd += std::min( (int)days_in_month(month(), year()) - (int)day(), (int)d - (int)day() );
+	}
 }
