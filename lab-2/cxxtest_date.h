@@ -97,7 +97,32 @@ public:
 		TS_ASSERT_EQUALS(j.mod_julian_day(), m);
 	}
 
-	void test5 () { //Testing the year class-member function in Julian.
+	void test5 () { //Testing the -= and += operators.
+		time_t t = 0;
+		set_k_time(t);
+		Julian j;
+		unsigned int m = j.mod_julian_day();
+
+		//+=
+		TS_ASSERT_EQUALS(j.mod_julian_day(), m);
+		m+=1;
+		j+=1;
+		TS_ASSERT_EQUALS(j.mod_julian_day(), m);
+		m+=999;
+		j+=999;
+		TS_ASSERT_EQUALS(j.mod_julian_day(), m);
+
+		//-=
+		TS_ASSERT_EQUALS(j.mod_julian_day(), m);
+		m-=1;
+		j-=1;
+		TS_ASSERT_EQUALS(j.mod_julian_day(), m);
+		m-=999;
+		j-=999;
+		TS_ASSERT_EQUALS(j.mod_julian_day(), m);
+	}
+
+	void test6 () { //Testing the year class-member function in Julian.
 		Julian* j;
 		time_t t;
 
@@ -127,7 +152,7 @@ public:
 	}
 
 	//Needs further testing when more operators are implemented.
-	void test6 () { //Testing add_year in Julian.
+	void test7 () { //Testing add_year in Julian.
 		time_t t = 0;
 		set_k_time(t);
 		Julian j;
@@ -154,7 +179,7 @@ public:
 	}
 
 	//Needs further testing when more operators are implemented.
-	void test7 () { //Testing add_month in Julian.
+	void test8 () { //Testing add_month in Julian.
 		time_t t = 0;
 		set_k_time(t);
 		Julian j;
@@ -186,6 +211,20 @@ public:
 		TS_ASSERT_EQUALS(j.year(), y);
 		TS_ASSERT_EQUALS(j.month(), m);
 		TS_ASSERT_EQUALS(j.day(), d);
+	}
+
+	void test9 () { //Testing operator-(Julian)
+		time_t t = 0;
+		set_k_time(t);
+		Julian j1, j2;
+
+		TS_ASSERT_EQUALS(j1-j2, 0);
+		j1++;
+		TS_ASSERT_EQUALS(j1-j2, 1);
+		j1-=2;
+		TS_ASSERT_EQUALS(j1-j2, -1);
+		j1+=501;
+		TS_ASSERT_EQUALS(j1-j2, 500);
 	}
 
 	void testX1 () { //Testing all implemented funtions on a date.
