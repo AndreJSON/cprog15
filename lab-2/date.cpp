@@ -1,5 +1,28 @@
 #include "date.hpp"
 
+
+void lab2::Date::calculate_date() const {
+	cd.ejd = fjd;
+	cd.year = 0;
+	cd.day = cd.month = 1;
+	while(true) {
+		if(cd.ejd + (int)days_in_year(cd.year) <= ejd) {
+			cd.ejd += (int)days_in_year(cd.year);
+			cd.year++;
+		} else
+			break;
+	}
+	while(true) {
+		if(cd.ejd + (int)days_in_month(cd.month, cd.year) <= ejd) {
+			cd.ejd += (int)days_in_month(cd.month, cd.year);
+			cd.month++;
+		} else
+			break;
+	}
+	cd.day += ejd - cd.ejd;
+	cd.ejd += cd.day - 1;
+}
+
 lab2::Date::Date() {
 	time_t my_time;
 	k_time(&my_time);
@@ -33,29 +56,12 @@ lab2::Date::Date() {
 	ejd += day; //Should be -1 since first day has index 1, but since year 0 is a leap year, we also need to add 1.
 }
 
-lab2::Date::~Date() {
+
+lab2::Date::Date(int e) {
+	ejd = e;
 }
 
-void lab2::Date::calculate_date() const {
-	cd.ejd = fjd;
-	cd.year = 0;
-	cd.day = cd.month = 1;
-	while(true) {
-		if(cd.ejd + (int)days_in_year(cd.year) <= ejd) {
-			cd.ejd += (int)days_in_year(cd.year);
-			cd.year++;
-		} else
-			break;
-	}
-	while(true) {
-		if(cd.ejd + (int)days_in_month(cd.month, cd.year) <= ejd) {
-			cd.ejd += (int)days_in_month(cd.month, cd.year);
-			cd.month++;
-		} else
-			break;
-	}
-	cd.day += ejd - cd.ejd;
-	cd.ejd += cd.day - 1;
+lab2::Date::~Date() {
 }
 
 int lab2::Date::year() const {

@@ -1,7 +1,41 @@
 #include "julian.hpp"
 
 
-lab2::Julian::~Julian (){
+lab2::Julian::Julian() : Date() {
+}
+
+lab2::Julian::Julian(int e) : Date(e){
+}
+
+lab2::Julian::~Julian() {
+}
+
+lab2::Julian& lab2::Julian::operator++() {
+	if(ejd < 2998560) //year 3500.
+		ejd++;
+	else
+		throw std::out_of_range("Invalid Date");
+	return *this;
+}
+
+lab2::Julian& lab2::Julian::operator--() {
+	if(ejd > (fjd+60)) //year 0 a little after march 1.
+		ejd--;
+	else
+		throw std::out_of_range("Invalid Date");
+	return *this;
+}
+
+lab2::Julian lab2::Julian::operator++(int) {
+	Julian tmp((*this).ejd);
+	++(*this);
+	return tmp;
+}
+
+lab2::Julian lab2::Julian::operator--(int) {
+	Julian tmp((*this).ejd);
+	--(*this);
+	return tmp;
 }
 
 unsigned int lab2::Julian::days_in_month(int month, int year) const {
