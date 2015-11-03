@@ -13,6 +13,9 @@ namespace lab2 {
 		Julian& operator--();
 		Julian operator++(int);
 		Julian operator--(int);
+		Julian& operator+=(const int&);
+		Julian& operator-=(const int&);
+		int operator-(const Julian&);
 		unsigned int days_in_month(int, int) const override;
 		bool is_leap_year(int) const override;
 		void add_year(int) override;

@@ -38,6 +38,26 @@ lab2::Julian lab2::Julian::operator--(int) {
 	return tmp;
 }
 
+lab2::Julian& lab2::Julian::operator+=(const int& i) {
+	if(ejd+i < 2998560) //year 3500.
+		ejd+=i;
+	else
+		throw std::out_of_range("Invalid Date");
+	return *this;
+}
+
+lab2::Julian& lab2::Julian::operator-=(const int& i) {
+	if(ejd-i > (fjd+60)) //year 0 a little after march 1.
+		ejd-=i;
+	else
+		throw std::out_of_range("Invalid Date");
+	return *this;
+}
+
+int lab2::Julian::operator-(const Julian& j) {
+	return ejd-j.ejd;
+}
+
 unsigned int lab2::Julian::days_in_month(int month, int year) const {
 	return month_lengths.at(month-1) + ((month == 2 && is_leap_year(year))? 1:0);
 }
