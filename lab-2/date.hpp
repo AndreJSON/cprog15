@@ -4,6 +4,7 @@
 #include "kattistime.h"
 #ifndef DATE_HPP
 #define DATE_HPP
+#define protected public //WHEN TESTING ONLY!!!
 
 namespace lab2 {
 
@@ -21,7 +22,6 @@ namespace lab2 {
 
 	/*
 	* Dates from the first of march year 0 are ok.
-	*
 	* There are unfortunately a bunch of stupid constraints to the lab-task that prevents this abstract class from being written in a general and highly extensible way.
 	*/
 	class Date {
@@ -34,6 +34,10 @@ namespace lab2 {
 		std::vector<std::string> week_day_names = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
 		std::vector<std::string> month_names = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
 		std::vector<int> month_lengths = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+		virtual bool is_leap_year(int) const = 0;
+		virtual unsigned int days_in_month(int, int) const = 0;
+		unsigned int days_in_year(int) const;
+		int early_julian_day() const;
 	public:
 		Date();
 		Date(int e);
@@ -54,16 +58,12 @@ namespace lab2 {
 		unsigned int day() const;
 		unsigned int week_day() const;
 		unsigned int days_per_week() const;
-		unsigned int days_this_month() const;
-		virtual unsigned int days_in_month(int, int) const = 0;
-		unsigned int days_in_year(int) const;	
+		unsigned int days_this_month() const;	
 		std::string week_day_name() const;
 		std::string month_name() const;
 		virtual void add_year(int) = 0;
 		virtual void add_month(int) = 0;
-		virtual bool is_leap_year(int) const = 0;
 		int mod_julian_day() const;
-		int early_julian_day() const;
 	};
 }
 

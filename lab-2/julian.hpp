@@ -2,22 +2,24 @@
 #include <stdexcept>
 #ifndef JULIAN_HPP
 #define JULIAN_HPP
+#define protected public //WHEN TESTING ONLY!!!
 
 namespace lab2 {
 	class Julian : public Date {
+	protected:
+		unsigned int days_in_month(int, int) const override;
+		bool is_leap_year(int) const override;
 	public:
 		Julian();
 		Julian(int e);
 		~Julian();
-		Julian& operator++();
-		Julian& operator--();
+		Julian& operator++() override;
+		Julian& operator--() override;
 		Julian operator++(int);
 		Julian operator--(int);
-		Julian& operator+=(const int&);
-		Julian& operator-=(const int&);
+		Julian& operator+=(const int&) override;
+		Julian& operator-=(const int&) override;
 		int operator-(const Julian&);
-		unsigned int days_in_month(int, int) const override;
-		bool is_leap_year(int) const override;
 		void add_year(int) override;
 		void add_month(int) override;
 		friend std::ostream& operator<< (std::ostream& os, const Julian& j) {

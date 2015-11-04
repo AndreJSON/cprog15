@@ -108,6 +108,7 @@ public:
 		time_t t = 0;
 		set_k_time(t);
 		Julian j;
+		Date& d = j;
 		unsigned int m = j.mod_julian_day();
 
 		//+=
@@ -118,6 +119,9 @@ public:
 		m+=999;
 		j+=999;
 		TS_ASSERT_EQUALS(j.mod_julian_day(), m);
+		d+=33;
+		m+=33;
+		TS_ASSERT_EQUALS(j.mod_julian_day(), m);
 
 		//-=
 		TS_ASSERT_EQUALS(j.mod_julian_day(), m);
@@ -126,6 +130,9 @@ public:
 		TS_ASSERT_EQUALS(j.mod_julian_day(), m);
 		m-=999;
 		j-=999;
+		TS_ASSERT_EQUALS(j.mod_julian_day(), m);
+		d-=33;
+		m-=33;
 		TS_ASSERT_EQUALS(j.mod_julian_day(), m);
 	}
 
