@@ -58,6 +58,7 @@ public:
 		time_t t = 0;
 		set_k_time(t);
 		Julian j;
+		Date* d = (Date*)&j;
 		unsigned int m = j.mod_julian_day();
 
 		//j++
@@ -77,6 +78,9 @@ public:
 		++m;
 		TS_ASSERT_EQUALS((++j).mod_julian_day(), m);
 		TS_ASSERT_EQUALS(j.mod_julian_day(), m);
+		m++;
+		TS_ASSERT_EQUALS((++(*d)).mod_julian_day(), m);
+		TS_ASSERT_EQUALS(j.mod_julian_day(), m);
 
 		//j--
 		TS_ASSERT_EQUALS(j.mod_julian_day(), m);
@@ -94,6 +98,9 @@ public:
 		TS_ASSERT_EQUALS(j.mod_julian_day(), m);
 		--m;
 		TS_ASSERT_EQUALS((--j).mod_julian_day(), m);
+		TS_ASSERT_EQUALS(j.mod_julian_day(), m);
+		m--;
+		TS_ASSERT_EQUALS((--(*d)).mod_julian_day(), m);
 		TS_ASSERT_EQUALS(j.mod_julian_day(), m);
 	}
 
@@ -292,6 +299,8 @@ public:
 		TS_ASSERT_EQUALS(j1==j2, false);
 		j1=j3;
 		TS_ASSERT_EQUALS(j1==j2, true);
+		j2++;
+		TS_ASSERT_EQUALS(j1==j3, true);
 	}
 
 	void testX1 () { //Testing all implemented funtions on a date.
