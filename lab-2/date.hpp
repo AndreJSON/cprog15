@@ -43,6 +43,7 @@ namespace lab2 {
 		bool operator<=(const Date&) const;
 		bool operator>(const Date&) const;
 		bool operator>=(const Date&) const;
+		Date& operator=(const Date&);
 		virtual ~Date();
 		int year() const;
 		unsigned int month() const;

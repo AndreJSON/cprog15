@@ -88,6 +88,11 @@ bool lab2::Date::operator>=(const Date& d) const {
 	return ejd >= d.ejd;
 }
 
+lab2::Date& lab2::Date::operator=(const Date& d) {
+	ejd = d.ejd;
+	return *this;
+}
+
 int lab2::Date::year() const {
 	if(cd.ejd != ejd)
 		calculate_date();

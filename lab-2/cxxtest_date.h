@@ -282,6 +282,18 @@ public:
 		j1--;
 	}
 
+	void test11 () { //Testing operator=
+		time_t t = 0;
+		set_k_time(t);
+		Julian j1, j2, j3;
+
+		TS_ASSERT_EQUALS(j1==j2, true);
+		j1++;
+		TS_ASSERT_EQUALS(j1==j2, false);
+		j1=j3;
+		TS_ASSERT_EQUALS(j1==j2, true);
+	}
+
 	void testX1 () { //Testing all implemented funtions on a date.
 		time_t t = 1445243911;
 		set_k_time(t);
