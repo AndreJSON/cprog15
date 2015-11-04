@@ -227,6 +227,61 @@ public:
 		TS_ASSERT_EQUALS(j1-j2, 500);
 	}
 
+	void test10 () { //Testing relational operators.
+		time_t t = 0;
+		set_k_time(t);
+		Julian j1, j2;
+
+		//==
+		TS_ASSERT_EQUALS(j1==j2, true); //start with both of them equal to make things easier.
+		j1++;
+		TS_ASSERT_EQUALS(j1==j2, false);
+		j2++;
+		TS_ASSERT_EQUALS(j1==j2, true);
+
+		//!=
+		TS_ASSERT_EQUALS(j1==j2, true); //start with both of them equal to make things easier.
+		TS_ASSERT_EQUALS(j1!=j2, false);
+		j1++;
+		TS_ASSERT_EQUALS(j1!=j2, true);
+		j2++;
+		TS_ASSERT_EQUALS(j1!=j2, false);
+
+		//<
+		TS_ASSERT_EQUALS(j1==j2, true); //start with both of them equal to make things easier.
+		TS_ASSERT_EQUALS(j1<j2, false);
+		j1--;
+		TS_ASSERT_EQUALS(j1<j2, true);
+		j2--;
+		TS_ASSERT_EQUALS(j1<j2, false);
+
+		//<=
+		TS_ASSERT_EQUALS(j1==j2, true); //start with both of them equal to make things easier.
+		TS_ASSERT_EQUALS(j1<=j2, true);
+		j1--;
+		TS_ASSERT_EQUALS(j1<=j2, true);
+		j1+=2;
+		TS_ASSERT_EQUALS(j1<=j2, false);
+		j1--;
+
+		//>
+		TS_ASSERT_EQUALS(j1==j2, true); //start with both of them equal to make things easier.
+		TS_ASSERT_EQUALS(j1>j2, false);
+		j1++;
+		TS_ASSERT_EQUALS(j1>j2, true);
+		j1--;
+		TS_ASSERT_EQUALS(j1>j2, false);
+
+		//>=
+		TS_ASSERT_EQUALS(j1==j2, true); //start with both of them equal to make things easier.
+		TS_ASSERT_EQUALS(j1>=j2, true);
+		j1--;
+		TS_ASSERT_EQUALS(j1>=j2, false);
+		j1+=2;
+		TS_ASSERT_EQUALS(j1>=j2, true);
+		j1--;
+	}
+
 	void testX1 () { //Testing all implemented funtions on a date.
 		time_t t = 1445243911;
 		set_k_time(t);
