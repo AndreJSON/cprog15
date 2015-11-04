@@ -1,5 +1,5 @@
 #include "date.hpp"
-#include "julian.hpp"
+#include "gregorian.hpp"
 #include "kattistime.h"
 
 using namespace lab2;
@@ -14,7 +14,7 @@ public:
 	}
 
 	void test1 () { //Testing a bunch of years with the leap year function.
-		Julian j;
+		Gregorian j;
 		TS_ASSERT_EQUALS(j.is_leap_year(0), true);
 		TS_ASSERT_EQUALS(j.is_leap_year(1), false);
 		TS_ASSERT_EQUALS(j.is_leap_year(4), true);
@@ -30,9 +30,9 @@ public:
 		TS_ASSERT_EQUALS(j.is_leap_year(2600), false);
 	}
 
-	void test2 () { //Testing days_in_month for Julian.
+	void test2 () { //Testing days_in_month for Gregorian.
 		unsigned int days[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-		Julian j;
+		Gregorian j;
 		for (auto i = 0; i < 12; i++)
 			TS_ASSERT_EQUALS(j.days_in_month(i+1,2015), days[i]);
 		for (auto i = 0; i < 12; i++)
@@ -44,8 +44,8 @@ public:
 		TS_ASSERT_EQUALS(j.days_in_month(2,1900), 28);
 	}
 
-	void test3 () { //Testing days_in_year for Julian.
-		Julian j;
+	void test3 () { //Testing days_in_year for Gregorian.
+		Gregorian j;
 		TS_ASSERT_EQUALS(j.days_in_year(0),366);
 		TS_ASSERT_EQUALS(j.days_in_year(1),365);
 		TS_ASSERT_EQUALS(j.days_in_year(4),366);
@@ -57,7 +57,7 @@ public:
 	void test4 () { //Testing the increment and decrement operators.
 		time_t t = 0;
 		set_k_time(t);
-		Julian j;
+		Gregorian j;
 		Date* d = (Date*)&j;
 		unsigned int m = j.mod_julian_day();
 
@@ -107,7 +107,7 @@ public:
 	void test5 () { //Testing the -= and += operators.
 		time_t t = 0;
 		set_k_time(t);
-		Julian j;
+		Gregorian j;
 		Date& d = j;
 		unsigned int m = j.mod_julian_day();
 
@@ -136,40 +136,40 @@ public:
 		TS_ASSERT_EQUALS(j.mod_julian_day(), m);
 	}
 
-	void test6 () { //Testing the year class-member function in Julian.
-		Julian* j;
+	void test6 () { //Testing the year class-member function in Gregorian.
+		Gregorian* j;
 		time_t t;
 
 		t = 1445243911;
 		set_k_time(t);
-		j = new Julian();
+		j = new Gregorian();
 		TS_ASSERT_EQUALS((*j).year(), 2015);
 		delete j;
 
 		t = 1445243911 - 86400;
 		set_k_time(t);
-		j = new Julian();
+		j = new Gregorian();
 		TS_ASSERT_EQUALS((*j).year(), 2015);
 		delete j;
 
 		t = 0;
 		set_k_time(t);
-		j = new Julian();
+		j = new Gregorian();
 		TS_ASSERT_EQUALS((*j).year(), 1970);
 		delete j;
 
 		t = 1445243911 + 7000 * 86400;
 		set_k_time(t);
-		j = new Julian();
+		j = new Gregorian();
 		TS_ASSERT_EQUALS((*j).year(), 2034);
 		delete j;
 	}
 
 	//Needs further testing when more operators are implemented.
-	void test7 () { //Testing add_year in Julian.
+	void test7 () { //Testing add_year in Gregorian.
 		time_t t = 0;
 		set_k_time(t);
-		Julian j;
+		Gregorian j;
 		int y = 1970;
 		unsigned int m = 1;
 		unsigned int d = 1;
@@ -193,10 +193,10 @@ public:
 	}
 
 	//Needs further testing when more operators are implemented.
-	void test8 () { //Testing add_month in Julian.
+	void test8 () { //Testing add_month in Gregorian.
 		time_t t = 0;
 		set_k_time(t);
-		Julian j;
+		Gregorian j;
 		int y = 1970;
 		unsigned int m = 1;
 		unsigned int d = 1;
@@ -227,10 +227,10 @@ public:
 		TS_ASSERT_EQUALS(j.day(), d);
 	}
 
-	void test9 () { //Testing operator-(Julian)
+	void test9 () { //Testing operator-(Gregorian)
 		time_t t = 0;
 		set_k_time(t);
-		Julian j1, j2;
+		Gregorian j1, j2;
 
 		TS_ASSERT_EQUALS(j1-j2, 0);
 		j1++;
@@ -244,7 +244,7 @@ public:
 	void test10 () { //Testing relational operators.
 		time_t t = 0;
 		set_k_time(t);
-		Julian j1, j2;
+		Gregorian j1, j2;
 
 		//==
 		TS_ASSERT_EQUALS(j1==j2, true); //start with both of them equal to make things easier.
@@ -299,7 +299,7 @@ public:
 	void test11 () { //Testing operator=
 		time_t t = 0;
 		set_k_time(t);
-		Julian j1, j2, j3;
+		Gregorian j1, j2, j3;
 
 		TS_ASSERT_EQUALS(j1==j2, true);
 		j1++;
@@ -313,7 +313,7 @@ public:
 	void testX1 () { //Testing all implemented funtions on a date.
 		time_t t = 1445243911;
 		set_k_time(t);
-		Julian j;
+		Gregorian j;
 		TS_ASSERT_EQUALS(j.early_julian_day(), 2457315);
 		TS_ASSERT_EQUALS(j.mod_julian_day(), 57315);
 		TS_ASSERT_EQUALS(j.week_day(), 1);
@@ -324,7 +324,7 @@ public:
 	void testX2 () { //Testing all implemented funtions on a date.
 		time_t t = 1445243911 - 86400;
 		set_k_time(t);
-		Julian j;
+		Gregorian j;
 		TS_ASSERT_EQUALS(j.early_julian_day(), 2457314);
 		TS_ASSERT_EQUALS(j.mod_julian_day(), 57314);
 		TS_ASSERT_EQUALS(j.week_day(), 7);
@@ -335,7 +335,7 @@ public:
 	void testX3 () { //Testing all implemented funtions on a date.
 		time_t t = 0;
 		set_k_time(t);
-		Julian j;
+		Gregorian j;
 		TS_ASSERT_EQUALS(j.early_julian_day(), 2440588);
 		TS_ASSERT_EQUALS(j.mod_julian_day(), 40588);
 		TS_ASSERT_EQUALS(j.week_day(), 4);
@@ -346,7 +346,7 @@ public:
 	void testX4 () { //Testing all implemented funtions on a date.
 		time_t t = 1445243911 + 7000 * 86400;
 		set_k_time(t);
-		Julian j;
+		Gregorian j;
 		TS_ASSERT_EQUALS(j.early_julian_day(), 2464315);
 		TS_ASSERT_EQUALS(j.mod_julian_day(), 64315);
 		TS_ASSERT_EQUALS(j.week_day(), 1);
@@ -358,7 +358,7 @@ public:
 		time_t t;
 		time(&t);
 		set_k_time(t);
-		Julian j;
-		std::cout << " Today's Julian date is: " << j << " ";
+		Gregorian j;
+		std::cout << " Today's Gregorian date is: " << j << " ";
 	}
 };
