@@ -1,7 +1,7 @@
 #include "date.hpp"
 #include <stdexcept>
-#ifndef JULIAN_HPP
-#define JULIAN_HPP
+#ifndef GREGORIAN_HPP
+#define GREGORIAN_HPP
 #define protected public //WHEN TESTING ONLY!!!
 
 namespace lab2 {
@@ -28,4 +28,4 @@ namespace lab2 {
 	};
 }
 
-#endif /* JULIAN_HPP */
+#endif /* GREGORIAN_HPP */
