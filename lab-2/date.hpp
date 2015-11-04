@@ -37,6 +37,12 @@ namespace lab2 {
 	public:
 		Date();
 		Date(int e);
+		bool operator==(const Date&) const;
+		bool operator!=(const Date&) const;
+		bool operator<(const Date&) const;
+		bool operator<=(const Date&) const;
+		bool operator>(const Date&) const;
+		bool operator>=(const Date&) const;
 		virtual ~Date();
 		int year() const;
 		unsigned int month() const;

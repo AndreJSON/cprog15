@@ -64,6 +64,30 @@ lab2::Date::Date(int e) {
 lab2::Date::~Date() {
 }
 
+bool lab2::Date::operator==(const Date& d) const {
+	return ejd == d.ejd;
+}
+
+bool lab2::Date::operator!=(const Date& d) const {
+	return ejd !=  d.ejd;
+}
+
+bool lab2::Date::operator<(const Date& d) const {
+	return ejd < d.ejd;
+}
+
+bool lab2::Date::operator<=(const Date& d) const {
+	return ejd <= d.ejd;
+}
+
+bool lab2::Date::operator>(const Date& d) const {
+	return ejd > d.ejd;
+}
+
+bool lab2::Date::operator>=(const Date& d) const {
+	return ejd >= d.ejd;
+}
+
 int lab2::Date::year() const {
 	if(cd.ejd != ejd)
 		calculate_date();
