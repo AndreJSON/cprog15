@@ -1,6 +1,5 @@
 #include "gregorian.hpp"
 
-
 lab2::Gregorian::Gregorian() : Date() {
 }
 

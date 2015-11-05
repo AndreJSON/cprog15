@@ -136,7 +136,7 @@ std::string lab2::Date::month_name() const {
 }
 
 int lab2::Date::mod_julian_day() const {
-	return ejd - 2400000;
+	return ejd - 2400001;
 }
 
 int lab2::Date::early_julian_day() const {

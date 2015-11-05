@@ -1,5 +1,26 @@
 #include "julian.hpp"
 
+void lab2::Julian::calculate_date() const {
+	cd.ejd = fjd - 2; //-2 because of the 2 day offset between julian and gregorian at year 1.
+	cd.year = 0;
+	cd.day = cd.month = 1;
+	while(true) {
+		if(cd.ejd + (int)days_in_year(cd.year) <= ejd) {
+			cd.ejd += (int)days_in_year(cd.year);
+			cd.year++;
+		} else
+			break;
+	}
+	while(true) {
+		if(cd.ejd + (int)days_in_month(cd.month, cd.year) <= ejd) {
+			cd.ejd += (int)days_in_month(cd.month, cd.year);
+			cd.month++;
+		} else
+			break;
+	}
+	cd.day += ejd - cd.ejd;
+	cd.ejd += cd.day - 1;
+}
 
 lab2::Julian::Julian() : Date() {
 }

@@ -25,10 +25,9 @@ namespace lab2 {
 	* There are unfortunately a bunch of stupid constraints to the lab-task that prevents this abstract class from being written in a general and highly extensible way.
 	*/
 	class Date {
-	private:
-		void calculate_date() const;
-		mutable Calculated_Date cd;
 	protected:
+		virtual void calculate_date() const;
+		mutable Calculated_Date cd;
 		int fjd = 1721060; //1st of January year 0 in the Gregorian calendar expressed in julian days.
 		int ejd; //Early Julian Day.
 		std::vector<std::string> week_day_names = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};

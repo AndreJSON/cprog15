@@ -7,6 +7,7 @@
 namespace lab2 {
 	class Julian : public Date {
 	protected:
+		void calculate_date() const override;
 		unsigned int days_in_month(int, int) const override;
 		bool is_leap_year(int) const override;
 	public:
