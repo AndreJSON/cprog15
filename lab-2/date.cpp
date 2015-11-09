@@ -31,7 +31,9 @@ lab2::Date::Date() {
     int month = t->tm_mon;
     int day   = t->tm_mday;
 
-    //TODO: CHECK IF INPUT IS OK, ELSE ALGORITHM MIGHT CRASH.
+    if( (year == 0 && month <= 2) || year < 0 || year > 3000 || month > 12 || month < 1 || day < 1) //Never checks if day is too large for month, but if the years are right the gmtime shouldnt be wrong.
+		std::invalid_argument("Not a valid date");
+
 	ejd = fjd;
 	while(year >= 400) {
 		year -= 400;
@@ -91,6 +93,10 @@ bool lab2::Date::operator>=(const Date& d) const {
 lab2::Date& lab2::Date::operator=(const Date& d) {
 	ejd = d.ejd;
 	return *this;
+}
+
+int lab2::Date::operator-(const Date& d) const{
+	return ejd-d.ejd;
 }
 
 int lab2::Date::year() const {

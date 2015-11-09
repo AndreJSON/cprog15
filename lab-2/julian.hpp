@@ -20,7 +20,6 @@ namespace lab2 {
 		Julian operator--(int);
 		Julian& operator+=(const int&) override;
 		Julian& operator-=(const int&) override;
-		int operator-(const Julian&);
 		void add_year(int) override;
 		void add_month(int) override;
 		friend std::ostream& operator<< (std::ostream& os, const Julian& j) {

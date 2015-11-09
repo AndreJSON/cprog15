@@ -1,6 +1,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <stdexcept>
 #include "kattistime.h"
 #ifndef DATE_HPP
 #define DATE_HPP
@@ -51,6 +52,7 @@ namespace lab2 {
 		bool operator>(const Date&) const;
 		bool operator>=(const Date&) const;
 		Date& operator=(const Date&);
+		int operator-(const Date&) const;
 		virtual ~Date();
 		int year() const;
 		unsigned int month() const;

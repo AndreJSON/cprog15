@@ -6,6 +6,33 @@ lab2::Gregorian::Gregorian() : Date() {
 lab2::Gregorian::Gregorian(int e) : Date(e){
 }
 
+lab2::Gregorian::Gregorian(int y, int m, int d) {
+	if( (y == 0 && m <= 2) || y < 0 || y > 3000 || m > 12 || m < 1 || d < 1 || (int)days_in_month(m, y) < d)
+		std::invalid_argument("Not a valid date");
+	ejd = fjd;
+	while(y >= 400) {
+		y -= 400;
+		ejd += 97 * 366 + 303 * 365;
+	}
+	while(y >= 100) {
+		y -= 100;
+		ejd += 24 * 366 + 76 * 365;
+	}
+	while(y >= 4) {
+		y -= 4;
+		ejd +=  366 + 3 * 365;
+	}
+	while(y >= 1) {
+		y --;
+		ejd += 365;
+	}
+	while(m > 0) {
+		ejd += month_lengths[m-1];
+		m--;
+	}
+	ejd += d; //Should be -1 since first day has index 1, but since year 0 is a leap year, we also need to add 1.
+}
+
 lab2::Gregorian::~Gregorian() {
 }
 
@@ -51,10 +78,6 @@ lab2::Gregorian& lab2::Gregorian::operator-=(const int& i) {
 	else
 		throw std::out_of_range("Invalid Date");
 	return *this;
-}
-
-int lab2::Gregorian::operator-(const Gregorian& j) {
-	return ejd-j.ejd;
 }
 
 unsigned int lab2::Gregorian::days_in_month(int month, int year) const {

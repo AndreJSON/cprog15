@@ -157,7 +157,8 @@ public:
 		g+=1;
 		TS_ASSERT_EQUALS(g.mod_julian_day(), m);
 		m+=999;
-		g+=999;
+		g+=998;
+		g++;
 		TS_ASSERT_EQUALS(g.mod_julian_day(), m);
 		d+=33;
 		m+=33;
@@ -301,11 +302,20 @@ public:
 		TS_ASSERT_EQUALS(g.day(), d);
 	}
 
-	void test9 () { //Testing operator-(Gregorian)
+	void test9 () { //Testing operator-
 		time_t t = 0;
 		set_k_time(t);
-		Gregorian j1, j2;
 
+		Gregorian g1, g2;
+		TS_ASSERT_EQUALS(g1-g2, 0);
+		g1++;
+		TS_ASSERT_EQUALS(g1-g2, 1);
+		g1-=2;
+		TS_ASSERT_EQUALS(g1-g2, -1);
+		g1+=501;
+		TS_ASSERT_EQUALS(g1-g2, 500);
+
+		Julian j1, j2;
 		TS_ASSERT_EQUALS(j1-j2, 0);
 		j1++;
 		TS_ASSERT_EQUALS(j1-j2, 1);
@@ -313,6 +323,15 @@ public:
 		TS_ASSERT_EQUALS(j1-j2, -1);
 		j1+=501;
 		TS_ASSERT_EQUALS(j1-j2, 500);
+
+		const Gregorian& g3 = g1;
+		const Julian& j3 = j1;
+		const Date& d1 = j1;
+		const Date& d2 = g1;
+		TS_ASSERT_EQUALS(d1-d2, 0);
+		TS_ASSERT_EQUALS(g3-j3, 0);
+		TS_ASSERT_EQUALS(d1-j1, g1-d2);
+		TS_ASSERT_EQUALS(j1-j1, 0);
 	}
 
 	void test10 () { //Testing relational operators.
@@ -373,8 +392,8 @@ public:
 	void test11 () { //Testing operator=
 		time_t t = 0;
 		set_k_time(t);
-		Gregorian j1, j2, j3;
 
+		Gregorian j1, j2, j3;
 		TS_ASSERT_EQUALS(j1==j2, true);
 		j1++;
 		TS_ASSERT_EQUALS(j1==j2, false);
@@ -382,6 +401,15 @@ public:
 		TS_ASSERT_EQUALS(j1==j2, true);
 		j2++;
 		TS_ASSERT_EQUALS(j1==j3, true);
+
+		const Gregorian j4, j5;
+		TS_ASSERT_EQUALS(j4==j5, true);
+		j1-=500;
+		j1=j4;
+		TS_ASSERT_EQUALS(j4==j1, true);
+		TS_ASSERT_EQUALS(j1==j5, true);
+		//Should not compile j5=j2;
+
 	}
 
 	void testX1 () { //Testing all implemented funtions on a date.

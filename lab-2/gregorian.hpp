@@ -12,6 +12,7 @@ namespace lab2 {
 	public:
 		Gregorian();
 		Gregorian(int e);
+		Gregorian(int y, int m, int d);
 		~Gregorian();
 		Gregorian& operator++() override;
 		Gregorian& operator--() override;
@@ -19,7 +20,6 @@ namespace lab2 {
 		Gregorian operator--(int);
 		Gregorian& operator+=(const int&) override;
 		Gregorian& operator-=(const int&) override;
-		int operator-(const Gregorian&);
 		void add_year(int) override;
 		void add_month(int) override;
 		friend std::ostream& operator<< (std::ostream& os, const Gregorian& j) {
