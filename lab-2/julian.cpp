@@ -28,6 +28,26 @@ lab2::Julian::Julian() : Date() {
 lab2::Julian::Julian(int e) : Date(e){
 }
 
+lab2::Julian::Julian(int y, int m, int d) {
+	if( (y == 0 && m <= 2) || y < 1 || y > 3000 || m > 12 || m < 1 || d < 1 || (int)days_in_month(m, y) < d)
+		std::invalid_argument("Not a valid date");
+	ejd = fjd;
+	while(y >= 4) {
+		y -= 4;
+		ejd +=  366 + 3 * 365;
+	}
+	while(y >= 1) {
+		y --;
+		ejd += 365;
+	}
+	while(m > 1) {
+		ejd += month_lengths[m-1];
+		m--;
+	}
+	ejd += d; //Should be -1 since first day has index 1, but since year 0 is a leap year, we also need to add 1.
+	ejd-=2; //Correcting the AD-BC shift offset of gregorian and julian.
+}
+
 lab2::Julian::~Julian() {
 }
 

@@ -408,8 +408,22 @@ public:
 		j1=j4;
 		TS_ASSERT_EQUALS(j4==j1, true);
 		TS_ASSERT_EQUALS(j1==j5, true);
-		//Should not compile j5=j2;
+		//j5=j2; //Should not compile 
 
+	}
+
+	void test12 () { //Testing the (y,m,d) constructor.
+		Gregorian g1(2015, 6, 3);
+		Julian j1(2015, 6, 3);
+		TS_ASSERT_EQUALS(g1==j1, false);
+		TS_ASSERT_EQUALS(g1.year(), 2015);
+		TS_ASSERT_EQUALS(g1.month(), 6);
+		TS_ASSERT_EQUALS(g1.day(), 3);
+		TS_ASSERT_EQUALS(g1.mod_julian_day(),57176);
+		TS_ASSERT_EQUALS(j1.year(), 2015);
+		TS_ASSERT_EQUALS(j1.month(), 6);
+		TS_ASSERT_EQUALS(j1.day(), 3);
+		TS_ASSERT_EQUALS(j1.mod_julian_day(),57189);
 	}
 
 	void testX1 () { //Testing all implemented funtions on a date.

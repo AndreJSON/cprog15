@@ -13,6 +13,7 @@ namespace lab2 {
 	public:
 		Julian();
 		Julian(int e);
+		Julian(int y, int m, int s);
 		~Julian();
 		Julian& operator++() override;
 		Julian& operator--() override;

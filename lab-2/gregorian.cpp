@@ -26,7 +26,7 @@ lab2::Gregorian::Gregorian(int y, int m, int d) {
 		y --;
 		ejd += 365;
 	}
-	while(m > 0) {
+	while(m > 1) {
 		ejd += month_lengths[m-1];
 		m--;
 	}
