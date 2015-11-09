@@ -33,6 +33,9 @@ lab2::Gregorian::Gregorian(int y, int m, int d) {
 	ejd += d; //Should be -1 since first day has index 1, but since year 0 is a leap year, we also need to add 1.
 }
 
+lab2::Gregorian::Gregorian(const Date& d) : Date(d) {
+}
+
 lab2::Gregorian::~Gregorian() {
 }
 
@@ -81,7 +84,7 @@ lab2::Gregorian& lab2::Gregorian::operator-=(const int& i) {
 }
 
 unsigned int lab2::Gregorian::days_in_month(int month, int year) const {
-	return month_lengths.at(month-1) + ((month == 2 && is_leap_year(year))? 1:0);
+	return month_lengths[month-1] + ((month == 2 && is_leap_year(year))? 1:0);
 }
 
 bool lab2::Gregorian::is_leap_year(int year) const {
@@ -137,7 +140,7 @@ void lab2::Gregorian::add_month(int n) {
 		add_year( (n-(n%12)) /12 );
 		n = n%12;
 	}
-	while((m+n)%12 != month()) {
+	while((m+n)%12 != (month()%12)) {
 		ejd+=27;
 	}
 	if(days_in_month(month(), year()) >= d) {

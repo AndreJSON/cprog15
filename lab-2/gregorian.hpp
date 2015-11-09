@@ -13,6 +13,7 @@ namespace lab2 {
 		Gregorian();
 		Gregorian(int e);
 		Gregorian(int y, int m, int d);
+		Gregorian(const Date&);
 		~Gregorian();
 		Gregorian& operator++() override;
 		Gregorian& operator--() override;

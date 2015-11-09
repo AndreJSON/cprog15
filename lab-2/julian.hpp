@@ -14,6 +14,7 @@ namespace lab2 {
 		Julian();
 		Julian(int e);
 		Julian(int y, int m, int s);
+		Julian(const Date&);
 		~Julian();
 		Julian& operator++() override;
 		Julian& operator--() override;

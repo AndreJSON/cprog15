@@ -63,6 +63,10 @@ lab2::Date::Date(int e) {
 	ejd = e;
 }
 
+lab2::Date::Date(const Date& d) {
+	ejd = d.ejd;
+}
+
 lab2::Date::~Date() {
 }
 
@@ -134,11 +138,11 @@ unsigned int lab2::Date::days_in_year(int year) const {
 }
 
 std::string lab2::Date::week_day_name() const {
-	return week_day_names.at(week_day()-1);
+	return week_day_names[week_day()-1];
 }
 
 std::string lab2::Date::month_name() const {
-	return month_names.at(month()-1);
+	return month_names[month()-1];
 }
 
 int lab2::Date::mod_julian_day() const {

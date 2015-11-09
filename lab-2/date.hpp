@@ -29,11 +29,11 @@ namespace lab2 {
 	protected:
 		virtual void calculate_date() const;
 		mutable Calculated_Date cd;
-		int fjd = 1721060; //1st of January year 0 in the Gregorian calendar expressed in julian days.
+		const static int fjd = 1721060; //1st of January year 0 in the Gregorian calendar expressed in julian days.
 		int ejd; //Early Julian Day.
-		std::vector<std::string> week_day_names = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
-		std::vector<std::string> month_names = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-		std::vector<int> month_lengths = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+		const std::string week_day_names[7] = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+		const std::string month_names[12] = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+		const int month_lengths[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 		virtual bool is_leap_year(int) const = 0;
 		virtual unsigned int days_in_month(int, int) const = 0;
 		unsigned int days_in_year(int) const;
@@ -41,6 +41,7 @@ namespace lab2 {
 	public:
 		Date();
 		Date(int e);
+		Date(const Date&);
 		virtual Date& operator++() = 0;
 		virtual Date& operator--() = 0;
 		virtual Date& operator+=(const int&) = 0;
