@@ -577,7 +577,7 @@ public:
 		TS_ASSERT_EQUALS(j.ejd, j.cd.ejd);
 	}
 
-	void testSpecific () {
+	void testSpecific1 () {
 		Julian j(2140, 8, 9);
 		j.add_year(18);
 		j += 18;
@@ -593,6 +593,44 @@ public:
 		TS_ASSERT_EQUALS(j.month(), 1);
 		TS_ASSERT_EQUALS(j.day(), 22);
 		TS_ASSERT_EQUALS(j.mod_julian_day(), 103444);
+	}
+
+	void testSpecific2 () {
+		Julian j1(2290, 6, 6);
+		TS_ASSERT_EQUALS(j1.year(), 2290);
+		TS_ASSERT_EQUALS(j1.month(), 6);
+		TS_ASSERT_EQUALS(j1.day(), 6);
+		TS_ASSERT_EQUALS(j1.mod_julian_day(), 157636);
+
+		Julian j2(1858, 11, 6);
+		TS_ASSERT_EQUALS(j2.year(), 1858);
+		TS_ASSERT_EQUALS(j2.month(), 11);
+		TS_ASSERT_EQUALS(j2.day(), 6);
+		TS_ASSERT_EQUALS(j2.mod_julian_day(), 1);
+
+		Julian j3(2000, 11, 6);
+		TS_ASSERT_EQUALS(j3.year(), 2000);
+		TS_ASSERT_EQUALS(j3.month(), 11);
+		TS_ASSERT_EQUALS(j3.day(), 6);
+		TS_ASSERT_EQUALS(j3.mod_julian_day(), 51867);
+
+		Julian j4(2000, 1, 6);
+		TS_ASSERT_EQUALS(j4.year(), 2000);
+		TS_ASSERT_EQUALS(j4.month(), 1);
+		TS_ASSERT_EQUALS(j4.day(), 6);
+		TS_ASSERT_EQUALS(j4.mod_julian_day(), 51562);
+
+		Julian j5(4, 4, 6);
+		TS_ASSERT_EQUALS(j5.year(), 4);
+		TS_ASSERT_EQUALS(j5.month(), 4);
+		TS_ASSERT_EQUALS(j5.day(), 6);
+		TS_ASSERT_EQUALS(j5.mod_julian_day(), -677386);
+
+		Julian j6(3, 4, 6);
+		TS_ASSERT_EQUALS(j6.year(), 3);
+		TS_ASSERT_EQUALS(j6.month(), 4);
+		TS_ASSERT_EQUALS(j6.day(), 6);
+		TS_ASSERT_EQUALS(j6.mod_julian_day(), -677752);
 	}
 
 	void testTodaysDate () { //Not really a test, just writing out todays date. Check manually if this is indeeed todays date.

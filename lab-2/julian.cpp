@@ -32,6 +32,11 @@ lab2::Julian::Julian(int y, int m, int d) {
 	if((y == 0 && m <= 2) || y < 1 || y > 3000 || m > 12 || m < 1 || d < 1 || (int)days_in_month(m, y) < d)
 		std::invalid_argument("Not a valid date");
 	ejd = fjd;
+	//Random stuff that makes things work//
+	ejd-=2;
+	if(m == 1 || m == 2)
+		ejd+=1;
+	//End of random stuff//
 	while(y >= 4) {
 		y -= 4;
 		ejd +=  366 + 3 * 365;
@@ -41,7 +46,7 @@ lab2::Julian::Julian(int y, int m, int d) {
 		ejd += 365;
 	}
 	while(m > 1) {
-		ejd += month_lengths[m-1];
+		ejd += month_lengths[m];
 		m--;
 	}
 	ejd += d; //Should be -1 since first day has index 1, but since year 0 is a leap year, we also need to add 1.
@@ -185,9 +190,13 @@ void lab2::Julian::subtract_year(int n) {
 }
 
 void lab2::Julian::add_month(int n) {
+	if(n<0) {
+		subtract_month(-n);
+		return;
+	}
 	unsigned int d = day();
 	unsigned int m = month();
-	if (n > 12) {
+	if (n >= 12) {
 		add_year( (n-(n%12)) /12 );
 		n = n%12;
 	}
@@ -201,6 +210,19 @@ void lab2::Julian::add_month(int n) {
 	}
 }
 
-void lab2::Julian::subtract_month(int) {
-
+void lab2::Julian::subtract_month(int n) {
+	unsigned int d = day();
+	unsigned int m = month();
+	if (n > 12) {
+		subtract_year( (n-(n%12)) /12 );
+		n = n%12;
+	}
+	while((m-n+12)%12 != (month()%12)) {
+		ejd-=27;
+	}
+	if(days_in_month(month(), year()) >= d) {
+		ejd += (int)d - (int)day();
+	} else {
+		ejd += std::min( (int)days_in_month(month(), year()) - (int)day(), (int)d - (int)day() );
+	}
 }

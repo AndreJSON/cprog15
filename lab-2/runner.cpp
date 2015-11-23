@@ -171,15 +171,21 @@ public:
  void runTest() { suite_MyTestSuite.testX6(); }
 } testDescription_suite_MyTestSuite_testX6;
 
-static class TestDescription_suite_MyTestSuite_testSpecific : public CxxTest::RealTestDescription {
+static class TestDescription_suite_MyTestSuite_testSpecific1 : public CxxTest::RealTestDescription {
 public:
- TestDescription_suite_MyTestSuite_testSpecific() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 580, "testSpecific" ) {}
- void runTest() { suite_MyTestSuite.testSpecific(); }
-} testDescription_suite_MyTestSuite_testSpecific;
+ TestDescription_suite_MyTestSuite_testSpecific1() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 580, "testSpecific1" ) {}
+ void runTest() { suite_MyTestSuite.testSpecific1(); }
+} testDescription_suite_MyTestSuite_testSpecific1;
+
+static class TestDescription_suite_MyTestSuite_testSpecific2 : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_MyTestSuite_testSpecific2() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 598, "testSpecific2" ) {}
+ void runTest() { suite_MyTestSuite.testSpecific2(); }
+} testDescription_suite_MyTestSuite_testSpecific2;
 
 static class TestDescription_suite_MyTestSuite_testTodaysDate : public CxxTest::RealTestDescription {
 public:
- TestDescription_suite_MyTestSuite_testTodaysDate() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 598, "testTodaysDate" ) {}
+ TestDescription_suite_MyTestSuite_testTodaysDate() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 636, "testTodaysDate" ) {}
  void runTest() { suite_MyTestSuite.testTodaysDate(); }
 } testDescription_suite_MyTestSuite_testTodaysDate;
 

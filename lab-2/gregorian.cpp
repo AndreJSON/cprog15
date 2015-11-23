@@ -175,9 +175,13 @@ void lab2::Gregorian::subtract_year(int n) {
 }
 
 void lab2::Gregorian::add_month(int n) {
+	if(n<0) {
+		subtract_month(-n);
+		return;
+	}
 	unsigned int d = day();
 	unsigned int m = month();
-	if (n > 12) {
+	if (n >= 12) {
 		add_year( (n-(n%12)) /12 );
 		n = n%12;
 	}
@@ -191,6 +195,19 @@ void lab2::Gregorian::add_month(int n) {
 	}
 }
 
-void lab2::Gregorian::subtract_month(int) {
-	
+void lab2::Gregorian::subtract_month(int n) {
+	unsigned int d = day();
+	unsigned int m = month();
+	if (n > 12) {
+		subtract_year( (n-(n%12)) /12 );
+		n = n%12;
+	}
+	while((m-n+12)%12 != (month()%12)) {
+		ejd-=27;
+	}
+	if(days_in_month(month(), year()) >= d) {
+		ejd += (int)d - (int)day();
+	} else {
+		ejd += std::min( (int)days_in_month(month(), year()) - (int)day(), (int)d - (int)day() );
+	}
 }
