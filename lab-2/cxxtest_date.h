@@ -200,6 +200,7 @@ public:
 		TS_ASSERT_EQUALS((*g).month(), 1);
 		TS_ASSERT_EQUALS((*g).day(), 1);
 		TS_ASSERT_EQUALS((*g).mod_julian_day(), 40587);
+		TS_ASSERT_EQUALS((*g).ejd, 2440588);
 		delete g;
 
 		t = 1445243911 + 7000 * 86400;
@@ -574,6 +575,24 @@ public:
 		TS_ASSERT_EQUALS(j.day(), 11);
 		TS_ASSERT_EQUALS(g.ejd, g.cd.ejd);
 		TS_ASSERT_EQUALS(j.ejd, j.cd.ejd);
+	}
+
+	void testSpecific () {
+		Julian j(2140, 8, 9);
+		j.add_year(18);
+		j += 18;
+		j.add_month(18);
+		j -= 18;
+		j += -18;
+		TS_ASSERT_EQUALS(j.year(), 2160);
+		TS_ASSERT_EQUALS(j.month(), 1);
+		TS_ASSERT_EQUALS(j.day(), 22);
+
+		j.add_year(-18);
+		TS_ASSERT_EQUALS(j.year(), 2142);
+		TS_ASSERT_EQUALS(j.month(), 1);
+		TS_ASSERT_EQUALS(j.day(), 22);
+		TS_ASSERT_EQUALS(j.mod_julian_day(), 103444);
 	}
 
 	void testTodaysDate () { //Not really a test, just writing out todays date. Check manually if this is indeeed todays date.

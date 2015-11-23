@@ -29,7 +29,7 @@ namespace lab2 {
 	protected:
 		virtual void calculate_date() const;
 		mutable Calculated_Date cd;
-		const static int fjd = 1721060; //1st of January year 0 in the Gregorian calendar expressed in julian days.
+		const static int fjd = 1721060; //1st of January year 0 in the Gregorian calendar 12:00 expressed in julian days.
 		int ejd; //Early Julian Day.
 		const std::string week_day_names[7] = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
 		const std::string month_names[12] = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
@@ -38,6 +38,8 @@ namespace lab2 {
 		virtual unsigned int days_in_month(int, int) const = 0;
 		unsigned int days_in_year(int) const;
 		int early_julian_day() const;
+		virtual void subtract_year(int) = 0;
+		virtual void subtract_month(int) = 0;
 	public:
 		Date();
 		Date(int e);

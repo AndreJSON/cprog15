@@ -99,6 +99,10 @@ bool lab2::Gregorian::is_leap_year(int year) const {
 }
 
 void lab2::Gregorian::add_year(int n) {
+	if(n<0) {
+		subtract_year(-n);
+		return;
+	}
 	unsigned int d = day();
 	unsigned int m = month();
 	int y = year();
@@ -122,14 +126,51 @@ void lab2::Gregorian::add_year(int n) {
 		return;
 	}
 	if(day() > d) {
-		ejd--;
+		ejd--; 
 		return;
 	}
-	if(day() > d) {
+	if(day() < d) {
 		ejd++;
 		return;
 	}
+
 	std::cerr << "IF THIS PRINTS, SOMETHING HAS GONE TERRIBLY WRONG IN ADD_YEAR";
+	return;
+}
+
+void lab2::Gregorian::subtract_year(int n) {
+	unsigned int d = day();
+	unsigned int m = month();
+	int y = year();
+	while (n > 0) {
+		ejd -= days_in_year(y);
+		n--;
+		y--;
+	}
+	if(d == day())
+		return;
+	if(m == 2 && d == 29) {
+		ejd--;
+		return;
+	}
+	if(month() > m) {
+		ejd--;
+		return;
+	}
+	if(month() < m) {
+		ejd++;
+		return;
+	}
+	if(day() > d) {
+		ejd--; 
+		return;
+	}
+	if(day() < d) {
+		ejd++;
+		return;
+	}
+
+	std::cerr << "IF THIS PRINTS, SOMETHING HAS GONE TERRIBLY WRONG IN SUBTRACT_YEAR";
 	return;
 }
 
@@ -148,4 +189,8 @@ void lab2::Gregorian::add_month(int n) {
 	} else {
 		ejd += std::min( (int)days_in_month(month(), year()) - (int)day(), (int)d - (int)day() );
 	}
+}
+
+void lab2::Gregorian::subtract_month(int) {
+	
 }

@@ -29,7 +29,7 @@ lab2::Julian::Julian(int e) : Date(e){
 }
 
 lab2::Julian::Julian(int y, int m, int d) {
-	if( (y == 0 && m <= 2) || y < 1 || y > 3000 || m > 12 || m < 1 || d < 1 || (int)days_in_month(m, y) < d)
+	if((y == 0 && m <= 2) || y < 1 || y > 3000 || m > 12 || m < 1 || d < 1 || (int)days_in_month(m, y) < d)
 		std::invalid_argument("Not a valid date");
 	ejd = fjd;
 	while(y >= 4) {
@@ -40,7 +40,7 @@ lab2::Julian::Julian(int y, int m, int d) {
 		y --;
 		ejd += 365;
 	}
-	while(m >= 1) {
+	while(m > 1) {
 		ejd += month_lengths[m-1];
 		m--;
 	}
@@ -110,6 +110,10 @@ bool lab2::Julian::is_leap_year(int year) const {
 }
 
 void lab2::Julian::add_year(int n) {
+	if(n<0) {
+		subtract_year(-n);
+		return;
+	}
 	unsigned int d = day();
 	unsigned int m = month();
 	int y = year();
@@ -136,11 +140,47 @@ void lab2::Julian::add_year(int n) {
 		ejd--;
 		return;
 	}
-	if(day() > d) {
+	if(day() < d) {
 		ejd++;
 		return;
 	}
 	std::cerr << "IF THIS PRINTS, SOMETHING HAS GONE TERRIBLY WRONG IN ADD_YEAR";
+	return;
+}
+
+void lab2::Julian::subtract_year(int n) {
+	unsigned int d = day();
+	unsigned int m = month();
+	int y = year();
+	while (n > 0) {
+		ejd -= days_in_year(y);
+		n--;
+		y--;
+	}
+	if(d == day())
+		return;
+	if(m == 2 && d == 29) {
+		ejd--;
+		return;
+	}
+	if(month() > m) {
+		ejd--;
+		return;
+	}
+	if(month() < m) {
+		ejd++;
+		return;
+	}
+	if(day() > d) {
+		ejd--; 
+		return;
+	}
+	if(day() < d) {
+		ejd++;
+		return;
+	}
+
+	std::cerr << "IF THIS PRINTS, SOMETHING HAS GONE TERRIBLY WRONG IN SUBTRACT_YEAR";
 	return;
 }
 
@@ -159,4 +199,8 @@ void lab2::Julian::add_month(int n) {
 	} else {
 		ejd += std::min( (int)days_in_month(month(), year()) - (int)day(), (int)d - (int)day() );
 	}
+}
+
+void lab2::Julian::subtract_month(int) {
+
 }
