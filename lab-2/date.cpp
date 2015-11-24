@@ -28,34 +28,14 @@ lab2::Date::Date() {
 	k_time(&my_time);
 	struct tm *t = gmtime(&my_time);
     int year  = t->tm_year + 1900;
-    int month = t->tm_mon;
+    int month = t->tm_mon + 1;
     int day   = t->tm_mday;
 
     if( (year == 0 && month <= 2) || year < 0 || year > 3000 || month > 12 || month < 1 || day < 1) //Never checks if day is too large for month, but if the years are right the gmtime shouldnt be wrong.
 		std::invalid_argument("Not a valid date");
 
-	ejd = fjd;
-	while(year >= 400) {
-		year -= 400;
-		ejd += 97 * 366 + 303 * 365;
-	}
-	while(year >= 100) {
-		year -= 100;
-		ejd += 24 * 366 + 76 * 365;
-	}
-	while(year >= 4) {
-		year -= 4;
-		ejd +=  366 + 3 * 365;
-	}
-	while(year >= 1) {
-		year --;
-		ejd += 365;
-	}
-	while(month > 0) {
-		ejd += month_lengths[month-1];
-		month--;
-	}
-	ejd += day; //Should be -1 since first day has index 1, but since year 0 is a leap year, we also need to add 1.
+	ejd = 40587 + 2400001;
+	ejd += (my_time - (my_time % 86400)) / 86400;
 }
 
 

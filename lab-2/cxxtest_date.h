@@ -631,6 +631,107 @@ public:
 		TS_ASSERT_EQUALS(j6.month(), 4);
 		TS_ASSERT_EQUALS(j6.day(), 6);
 		TS_ASSERT_EQUALS(j6.mod_julian_day(), -677752);
+
+		Julian j7(2214, 7, 23);
+		TS_ASSERT_EQUALS(j7.year(), 2214);
+		TS_ASSERT_EQUALS(j7.month(), 7);
+		TS_ASSERT_EQUALS(j7.day(), 23);
+		TS_ASSERT_EQUALS(j7.mod_julian_day(), 129924);
+	}
+
+	void testSpecific3 () {
+		time_t t = 1835352793;
+		set_k_time(t);
+		Julian j1;
+		TS_ASSERT_EQUALS(j1.mod_julian_day(), 61829);
+		TS_ASSERT_EQUALS(j1.year(), 2028);
+		TS_ASSERT_EQUALS(j1.month(), 2);
+		TS_ASSERT_EQUALS(j1.day(), 15);
+
+		t -= 15 * 86400;
+		set_k_time(t);
+		Julian j2;
+		TS_ASSERT_EQUALS(j2.mod_julian_day(), 61814);
+		TS_ASSERT_EQUALS(j2.year(), 2028);
+		TS_ASSERT_EQUALS(j2.month(), 1);
+		TS_ASSERT_EQUALS(j2.day(), 31);
+
+		t += 30 * 86400;
+		set_k_time(t);
+		Julian j3;
+		TS_ASSERT_EQUALS(j3.mod_julian_day(), 61844);
+		TS_ASSERT_EQUALS(j3.year(), 2028);
+		TS_ASSERT_EQUALS(j3.month(), 3);
+		TS_ASSERT_EQUALS(j3.day(), 1);
+
+		t += 30 * 86400;
+		set_k_time(t);
+		Julian j4;
+		TS_ASSERT_EQUALS(j4.mod_julian_day(), 61874);
+		TS_ASSERT_EQUALS(j4.year(), 2028);
+		TS_ASSERT_EQUALS(j4.month(), 3);
+		TS_ASSERT_EQUALS(j4.day(), 31);
+
+		t -= 400 * 86400;
+		set_k_time(t);
+		Julian j5;
+		TS_ASSERT_EQUALS(j5.mod_julian_day(), 61474);
+		TS_ASSERT_EQUALS(j5.year(), 2027);
+		TS_ASSERT_EQUALS(j5.month(), 2);
+		TS_ASSERT_EQUALS(j5.day(), 25);
+
+		t -= 1103 * 86400;
+		set_k_time(t);
+		Julian j6;
+		TS_ASSERT_EQUALS(j6.mod_julian_day(), 60371);
+		TS_ASSERT_EQUALS(j6.year(), 2024);
+		TS_ASSERT_EQUALS(j6.month(), 2);
+		TS_ASSERT_EQUALS(j6.day(), 18);
+
+		t -= 1 * 86400;
+		set_k_time(t);
+		Julian j7;
+		TS_ASSERT_EQUALS(j7.mod_julian_day(), 60370);
+		TS_ASSERT_EQUALS(j7.year(), 2024);
+		TS_ASSERT_EQUALS(j7.month(), 2);
+		TS_ASSERT_EQUALS(j7.day(), 17);
+
+
+		t -= 1 * 86400;
+		set_k_time(t);
+		Julian j8;
+		TS_ASSERT_EQUALS(j8.mod_julian_day(), 60369);
+		TS_ASSERT_EQUALS(j8.year(), 2024);
+		TS_ASSERT_EQUALS(j8.month(), 2);
+		TS_ASSERT_EQUALS(j8.day(), 16);
+
+    	t = 0;
+		set_k_time(t);
+		Julian j9;
+		TS_ASSERT_EQUALS(j9.mod_julian_day(), 40587);
+		TS_ASSERT_EQUALS(j9.year(), 1969);
+		TS_ASSERT_EQUALS(j9.month(), 12);
+		TS_ASSERT_EQUALS(j9.day(), 19);
+	}
+
+	void testSpecific4 () {
+		Julian j(2035,1,1);
+		TS_ASSERT_EQUALS(j.mod_julian_day(), 64341);
+		TS_ASSERT_EQUALS(j.year(), 2035);
+		TS_ASSERT_EQUALS(j.month(), 1);
+		TS_ASSERT_EQUALS(j.day(), 1);
+
+		j.add_year(17);
+		TS_ASSERT_EQUALS(j.mod_julian_day(), 70550);
+		TS_ASSERT_EQUALS(j.year(), 2052);
+		TS_ASSERT_EQUALS(j.month(), 1);
+		TS_ASSERT_EQUALS(j.day(), 1);
+
+		j.add_year(-17);
+		TS_ASSERT_EQUALS(j.mod_julian_day(), 64341);
+		TS_ASSERT_EQUALS(j.year(), 2035);
+		TS_ASSERT_EQUALS(j.month(), 1);
+		TS_ASSERT_EQUALS(j.day(), 1);
 	}
 
 	void testTodaysDate () { //Not really a test, just writing out todays date. Check manually if this is indeeed todays date.
