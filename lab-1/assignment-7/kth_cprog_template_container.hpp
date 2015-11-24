@@ -38,7 +38,7 @@ public:
 	size_t capacity () const;
 };
 
-//Default constructor. Makes room for 10 elements.
+//Default constructor. Makes room for 0 elements.
 template <class T>
 Vector<T>::Vector () {
 	frontSize = 0;
