@@ -732,6 +732,24 @@ public:
 		TS_ASSERT_EQUALS(j.year(), 2035);
 		TS_ASSERT_EQUALS(j.month(), 1);
 		TS_ASSERT_EQUALS(j.day(), 1);
+
+		Julian j2(2035,12,31);
+		TS_ASSERT_EQUALS(j2.mod_julian_day(), 64705);
+		TS_ASSERT_EQUALS(j2.year(), 2035);
+		TS_ASSERT_EQUALS(j2.month(), 12);
+		TS_ASSERT_EQUALS(j2.day(), 31);
+
+		j2.add_year(17);
+		TS_ASSERT_EQUALS(j2.mod_julian_day(), 70915);
+		TS_ASSERT_EQUALS(j2.year(), 2052);
+		TS_ASSERT_EQUALS(j2.month(), 12);
+		TS_ASSERT_EQUALS(j2.day(), 31);
+
+		j2.add_year(-17);
+		TS_ASSERT_EQUALS(j2.mod_julian_day(), 64705);
+		TS_ASSERT_EQUALS(j2.year(), 2035);
+		TS_ASSERT_EQUALS(j2.month(), 12);
+		TS_ASSERT_EQUALS(j2.day(), 31);
 	}
 
 	void testTodaysDate () { //Not really a test, just writing out todays date. Check manually if this is indeeed todays date.

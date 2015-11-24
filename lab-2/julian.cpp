@@ -34,6 +34,7 @@ lab2::Julian::Julian(int y, int m, int d) {
 	unsigned const dc = d;
 	if((y == 0 && m <= 2) || y < 1 || y > 3000 || m > 12 || m < 1 || d < 1 || (int)days_in_month(m, y) < d)
 		std::invalid_argument("Not a valid date");
+
 	ejd = fjd;
 	while(y >= 4) {
 		y -= 4;
@@ -44,7 +45,7 @@ lab2::Julian::Julian(int y, int m, int d) {
 		ejd += 365;
 	}
 	while(m > 1) {
-		ejd += month_lengths[m];
+		ejd += month_lengths[m-1];
 		m--;
 	}
 	//Correct off-by-a-little problems.
@@ -168,12 +169,19 @@ void lab2::Julian::subtract_year(int n) {
 		ejd--;
 		return;
 	}
-	if(month() > m) {
+	if(month() == m+1) {
 		ejd--;
 		return;
 	}
-	if(month() < m) {
+	if(month() == m-1) {
 		ejd++;
+		return;
+	}
+	if(month() != m){
+		if(month()==12)
+			ejd++;
+		else
+			ejd--;
 		return;
 	}
 	if(day() > d) {

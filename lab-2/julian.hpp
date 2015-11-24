@@ -26,9 +26,6 @@ namespace lab2 {
 		Julian& operator-=(const int&) override;
 		void add_year(int) override;
 		void add_month(int) override;
-		friend std::ostream& operator<< (std::ostream& os, const Julian& j) {
-			return os <<  j.year() << "-" << j.month() << "-" << j.day();
-		}
 	};
 }
 
