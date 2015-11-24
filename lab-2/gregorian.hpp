@@ -9,8 +9,6 @@ namespace lab2 {
 	protected:
 		unsigned int days_in_month(int, int) const override;
 		bool is_leap_year(int) const override;
-		void subtract_month(int) override;
-		void subtract_year(int) override;
 	public:
 		Gregorian();
 		Gregorian(int e);
@@ -23,8 +21,6 @@ namespace lab2 {
 		Gregorian operator--(int);
 		Gregorian& operator+=(const int&) override;
 		Gregorian& operator-=(const int&) override;
-		void add_year(int) override;
-		void add_month(int) override;
 	};
 }
 

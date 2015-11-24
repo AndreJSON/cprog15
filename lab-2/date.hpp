@@ -38,8 +38,8 @@ namespace lab2 {
 		virtual unsigned int days_in_month(int, int) const = 0;
 		unsigned int days_in_year(int) const;
 		int early_julian_day() const;
-		virtual void subtract_year(int) = 0;
-		virtual void subtract_month(int) = 0;
+		virtual void subtract_year(int);
+		virtual void subtract_month(int);
 	public:
 		Date();
 		Date(int e);
@@ -65,8 +65,8 @@ namespace lab2 {
 		unsigned int days_this_month() const;
 		std::string week_day_name() const;
 		std::string month_name() const;
-		virtual void add_year(int) = 0;
-		virtual void add_month(int) = 0;
+		virtual void add_year(int);
+		virtual void add_month(int);
 		int mod_julian_day() const;
 		friend std::ostream& operator<< (std::ostream& os, const Date& d) {
 			return os <<  d.year() << "-" << d.month() << "-" << d.day();
