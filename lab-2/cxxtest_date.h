@@ -752,6 +752,18 @@ public:
 		TS_ASSERT_EQUALS(j2.day(), 31);
 	}
 
+	void testSpecific5 () {
+		TS_ASSERT_THROWS(Gregorian g(2134, 2, 29), std::invalid_argument);
+	}
+
+	void testSpecific6 () {
+		Gregorian g(2241,1,10);
+		TS_ASSERT_EQUALS(g.mod_julian_day(), 139577);
+		TS_ASSERT_EQUALS(g.year(), 2241);
+		TS_ASSERT_EQUALS(g.month(), 1);
+		TS_ASSERT_EQUALS(g.day(), 10);
+	}
+
 	void testTodaysDate () { //Not really a test, just writing out todays date. Check manually if this is indeeed todays date.
 		time_t t;
 		time(&t);

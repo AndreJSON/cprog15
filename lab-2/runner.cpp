@@ -5,6 +5,7 @@
 #endif
 
 #define _CXXTEST_HAVE_STD
+#define _CXXTEST_HAVE_EH
 #include <cxxtest/TestListener.h>
 #include <cxxtest/TestTracker.h>
 #include <cxxtest/TestRunner.h>
@@ -195,9 +196,21 @@ public:
  void runTest() { suite_MyTestSuite.testSpecific4(); }
 } testDescription_suite_MyTestSuite_testSpecific4;
 
+static class TestDescription_suite_MyTestSuite_testSpecific5 : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_MyTestSuite_testSpecific5() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 755, "testSpecific5" ) {}
+ void runTest() { suite_MyTestSuite.testSpecific5(); }
+} testDescription_suite_MyTestSuite_testSpecific5;
+
+static class TestDescription_suite_MyTestSuite_testSpecific6 : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_MyTestSuite_testSpecific6() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 759, "testSpecific6" ) {}
+ void runTest() { suite_MyTestSuite.testSpecific6(); }
+} testDescription_suite_MyTestSuite_testSpecific6;
+
 static class TestDescription_suite_MyTestSuite_testTodaysDate : public CxxTest::RealTestDescription {
 public:
- TestDescription_suite_MyTestSuite_testTodaysDate() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 755, "testTodaysDate" ) {}
+ TestDescription_suite_MyTestSuite_testTodaysDate() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 767, "testTodaysDate" ) {}
  void runTest() { suite_MyTestSuite.testTodaysDate(); }
 } testDescription_suite_MyTestSuite_testTodaysDate;
 

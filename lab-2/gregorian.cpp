@@ -10,8 +10,9 @@ lab2::Gregorian::Gregorian(int y, int m, int d) {
 	unsigned const yc = y;
 	unsigned const mc = m;
 	unsigned const dc = d;
-	if( (y == 0 && m <= 2) || y < 0 || y > 3000 || m > 12 || m < 1 || d < 1 || (int)days_in_month(m, y) < d)
-		std::invalid_argument("Not a valid date");
+	if((y == 0 && m <= 2) || y < 0 || y > 3000 || m > 12 || m < 1 || d < 1 || (int)days_in_month(mc, yc) < d || (d == 29 && m == 2 && is_leap_year(y) == 0)) {
+		throw std::invalid_argument("Not a valid date");
+	}
 	ejd = fjd;
 	while(y >= 400) {
 		y -= 400;
@@ -30,13 +31,13 @@ lab2::Gregorian::Gregorian(int y, int m, int d) {
 		ejd += 365;
 	}
 	while(m > 1) {
-		ejd += month_lengths[m];
+		ejd += month_lengths[m-2];
 		m--;
 	}
 	//Correct off-by-a-little problems.
 	add_year(yc-year());
 	add_month(mc-month());
-	ejd+=(dc-day()); 
+	ejd+=(dc-day());
 }
 
 lab2::Gregorian::Gregorian(const Date& d) : Date(d) {

@@ -152,16 +152,23 @@ void lab2::Date::add_year(int n) {
 		ejd--;
 		return;
 	}
-	if(month() > m) {
+	if(month() == m+1) {
 		ejd--;
 		return;
 	}
-	if(month() < m) {
+	if(month() == m-1) {
 		ejd++;
 		return;
 	}
+	if(month() != m){
+		if(month()==12)
+			ejd++;
+		else
+			ejd--;
+		return;
+	}
 	if(day() > d) {
-		ejd--;
+		ejd--; 
 		return;
 	}
 	if(day() < d) {
