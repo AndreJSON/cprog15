@@ -22,4 +22,9 @@ public:
 		Calendar<Gregorian> cg2(cg1);
 		Calendar<Gregorian> cg3(cj1);
 	}
+
+	void testPrint () {
+		Calendar<Gregorian> gc;
+		std::cout << std::endl << gc;
+	}
 };

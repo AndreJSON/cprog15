@@ -31,9 +31,7 @@ namespace lab2 {
 		mutable Calculated_Date cd;
 		const static int fjd = 1721060; //1st of January year 0 in the Gregorian calendar 12:00 expressed in julian days.
 		int ejd; //Early Julian Day.
-		const std::string week_day_names[7] = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
-		const std::string month_names[12] = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-		const int month_lengths[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+		static constexpr int month_lengths[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 		virtual bool is_leap_year(int) const = 0;
 		virtual unsigned int days_in_month(int, int) const = 0;
 		unsigned int days_in_year(int) const;

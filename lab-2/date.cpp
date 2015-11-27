@@ -1,5 +1,6 @@
 #include "date.hpp"
 
+constexpr int lab2::Date::month_lengths[];
 
 void lab2::Date::calculate_date() const {
 	cd.ejd = fjd;
@@ -118,11 +119,34 @@ unsigned int lab2::Date::days_in_year(int year) const {
 }
 
 std::string lab2::Date::week_day_name() const {
-	return week_day_names[week_day()-1];
+	switch(week_day()) {
+		case 1: return "Monday";
+		case 2: return "Tuesday";
+		case 3: return "Wednesday";
+		case 4: return "Thursday";
+		case 5: return "Friday";
+		case 6: return "Saturday";
+		case 7: return "Sunday";
+		default: return "This should never return";
+	}
 }
 
 std::string lab2::Date::month_name() const {
-	return month_names[month()-1];
+	switch(month()) {
+		case 1: return "January";
+		case 2: return "February";
+		case 3: return "March";
+		case 4: return "April";
+		case 5: return "May";
+		case 6: return "June";
+		case 7: return "July";
+		case 8: return "August";
+		case 9: return "September";
+		case 10: return "October";
+		case 11: return "November";
+		case 12: return "December";
+		default: return "This should never return";
+	}
 }
 
 int lab2::Date::mod_julian_day() const {

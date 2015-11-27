@@ -39,5 +39,11 @@ public:
  void runTest() { suite_MyTestSuite.test1(); }
 } testDescription_suite_MyTestSuite_test1;
 
+static class TestDescription_suite_MyTestSuite_testPrint : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_MyTestSuite_testPrint() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 26, "testPrint" ) {}
+ void runTest() { suite_MyTestSuite.testPrint(); }
+} testDescription_suite_MyTestSuite_testPrint;
+
 #include <cxxtest/Root.cpp>
 const char* CxxTest::RealWorldDescription::_worldName = "cxxtest";
