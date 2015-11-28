@@ -19,7 +19,7 @@ public:
 		Calendar<Gregorian> cg1;
 		Calendar<Julian> cj1;
 
-		//Calendar<Gregorian> cg2(cg1);
+		Calendar<Gregorian> cg2(cg1);
 		Calendar<Gregorian> cg3(cj1);
 	}
 
@@ -28,6 +28,14 @@ public:
 		TS_ASSERT_EQUALS(c.add_event("Event 1"), true);
 		TS_ASSERT_EQUALS(c.add_event("Event 1"), false);
 		TS_ASSERT_EQUALS(c.add_event("Event 2"), true);
+		TS_ASSERT_EQUALS(c.remove_event("Event 1"), true);
+		TS_ASSERT_EQUALS(c.remove_event("Event 1"), false);
+
+		Calendar<Gregorian> c2(c);
+		TS_ASSERT_EQUALS(c2.add_event("Event 2"), false);
+
+		Calendar<Julian> j(c);
+		TS_ASSERT_EQUALS(j.add_event("Event 2"), false);
 	}
 
 	void testPrint () {
