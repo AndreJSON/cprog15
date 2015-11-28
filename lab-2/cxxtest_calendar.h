@@ -25,9 +25,9 @@ public:
 
 	void test2 () {
 		Calendar<Gregorian> c;
-		c.add_event("Event 1");
-		c.add_event("Event 1");
-		c.add_event("Event 2");
+		TS_ASSERT_EQUALS(c.add_event("Event 1"), true);
+		TS_ASSERT_EQUALS(c.add_event("Event 1"), false);
+		TS_ASSERT_EQUALS(c.add_event("Event 2"), true);
 	}
 
 	void testPrint () {
@@ -35,6 +35,6 @@ public:
 		gc.add_event("Event 1");
 		gc.add_event("Event 1");
 		gc.add_event("Event 2");
-		std::cout << std::endl << gc;
+		std::cout << std::endl << gc << std::endl;
 	}
 };

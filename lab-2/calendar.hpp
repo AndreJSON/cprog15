@@ -3,6 +3,7 @@
 #include "julian.hpp"
 #include "kattistime.h"
 #include <map>
+#include <set>
 #pragma once
 //#define private public //DURING TESTING ONLY!!!!!!!!!!!!!
 
@@ -12,7 +13,7 @@ namespace lab2 {
 	class Calendar {
 	private:
 		T *dp;
-		std::map<T, std::vector<std::string>*> event_map;
+		std::map<T, std::set<std::string>*> event_map;
 	public:
 		template <class T2>
 		Calendar(const Calendar<T2> &c) {
@@ -76,15 +77,29 @@ namespace lab2 {
 
 	template <class T>
 	bool Calendar<T>::add_event(std::string desc) {
+		return add_event(desc, dp->day(), dp->month(), dp->year());
+	}
+
+	template <class T>
+	bool Calendar<T>::add_event(std::string desc, int day) {
+		return add_event(desc, day, dp->month(), dp->year());
+	}
+
+	template <class T>
+	bool Calendar<T>::add_event(std::string desc, int day, int month) {
+		return add_event(desc, day, month, dp->year());
+	}
+
+	template <class T>
+	bool Calendar<T>::add_event(std::string desc, int day, int month, int year) {
 		try {
-			T tmp(*dp);
-			auto it = event_map.find(tmp);
-			if(it != event_map.end()) {
-				(event_map[tmp])->push_back(desc);
+			T tmp(year, month, day);
+			if(event_map.find(tmp) != event_map.end()) {
+				return (event_map[tmp]->insert(desc)).second;
 			}
 			else {
-				event_map[tmp] = new std::vector<std::string>();
-				(event_map[tmp])->push_back(desc);
+				event_map[tmp] = new std::set<std::string>();
+				event_map[tmp]->insert(desc);
 			}
 		}
 		catch(...) {
