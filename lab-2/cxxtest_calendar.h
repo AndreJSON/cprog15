@@ -26,11 +26,15 @@ public:
 	void test2 () {
 		Calendar<Gregorian> c;
 		c.add_event("Event 1");
+		c.add_event("Event 1");
 		c.add_event("Event 2");
 	}
 
 	void testPrint () {
 		Calendar<Gregorian> gc;
+		gc.add_event("Event 1");
+		gc.add_event("Event 1");
+		gc.add_event("Event 2");
 		std::cout << std::endl << gc;
 	}
 };

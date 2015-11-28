@@ -12,7 +12,7 @@ namespace lab2 {
 	class Calendar {
 	private:
 		T *dp;
-		std::map<T*, std::vector<std::string>> event_map;
+		std::map<T, std::vector<std::string>*> event_map;
 	public:
 		template <class T2>
 		Calendar(const Calendar<T2> &c) {
@@ -37,10 +37,14 @@ namespace lab2 {
 			os << "BEGIN:VCALENDAR" << std::endl;
 			os << "VERSION:2.0" << std::endl;
 			os << "PRODID:???????" << std::endl;
-			os << "BEGIN:VEVENT" << std::endl;
-			os << "DTSTART:19960401T120000" << std::endl;
-			os << "DESCRIPTION:" << std::endl;
-			os << "END:VEVENT" << std::endl;
+			for (auto i = c.event_map.begin(); i != c.event_map.end(); i++) {
+				for(auto desc = i->second->begin(); desc != i->second->end(); desc++) {
+					os << "BEGIN:VEVENT" << std::endl;
+					os << "DTSTART:" << i->first.year() << i->first.month() << i->first.day() << "T120000" << std::endl;
+					os << "DESCRIPTION:" << *desc << std::endl;
+					os << "END:VEVENT" << std::endl;
+				}
+			}
 			os << "END:VCALENDAR";
 			return os;
 		}
@@ -53,6 +57,9 @@ namespace lab2 {
 
 	template <class T>
 	Calendar<T>::~Calendar() {
+		for(auto i = event_map.begin(); i != event_map.end(); i++) {
+			delete i->second;
+		}
 		delete dp;
 	}
 
@@ -64,16 +71,21 @@ namespace lab2 {
 	template <class T>
 	bool Calendar<T>::set_date(int year, int month, int day) {
 		dp = new T(year, month, day);
-		return false; //Change this to accurately reflect the aility to set the date.
+		return false; //Change this to accurately reflect the ability to set the date.
 	}
 
 	template <class T>
 	bool Calendar<T>::add_event(std::string desc) {
 		try {
-			T *tmp = new T(*dp);
-			/*if(event_map.find(tmp)) {
-				event_map[tmp].push_back(desc);
-			}*/
+			T tmp(*dp);
+			auto it = event_map.find(tmp);
+			if(it != event_map.end()) {
+				(event_map[tmp])->push_back(desc);
+			}
+			else {
+				event_map[tmp] = new std::vector<std::string>();
+				(event_map[tmp])->push_back(desc);
+			}
 		}
 		catch(...) {
 			return false;
