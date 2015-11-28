@@ -39,9 +39,15 @@ public:
  void runTest() { suite_MyTestSuite.test1(); }
 } testDescription_suite_MyTestSuite_test1;
 
+static class TestDescription_suite_MyTestSuite_test2 : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_MyTestSuite_test2() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 26, "test2" ) {}
+ void runTest() { suite_MyTestSuite.test2(); }
+} testDescription_suite_MyTestSuite_test2;
+
 static class TestDescription_suite_MyTestSuite_testPrint : public CxxTest::RealTestDescription {
 public:
- TestDescription_suite_MyTestSuite_testPrint() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 26, "testPrint" ) {}
+ TestDescription_suite_MyTestSuite_testPrint() : CxxTest::RealTestDescription( Tests_MyTestSuite, suiteDescription_MyTestSuite, 32, "testPrint" ) {}
  void runTest() { suite_MyTestSuite.testPrint(); }
 } testDescription_suite_MyTestSuite_testPrint;
 

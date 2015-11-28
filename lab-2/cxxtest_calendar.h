@@ -19,8 +19,14 @@ public:
 		Calendar<Gregorian> cg1;
 		Calendar<Julian> cj1;
 
-		Calendar<Gregorian> cg2(cg1);
+		//Calendar<Gregorian> cg2(cg1);
 		Calendar<Gregorian> cg3(cj1);
+	}
+
+	void test2 () {
+		Calendar<Gregorian> c;
+		c.add_event("Event 1");
+		c.add_event("Event 2");
 	}
 
 	void testPrint () {
