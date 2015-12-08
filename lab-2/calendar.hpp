@@ -92,8 +92,16 @@ namespace lab2 {
 
 	template <class T>
 	bool Calendar<T>::set_date(int year, int month, int day) {
-		dp = new T(year, month, day);
-		return false; //Change this to accurately reflect the ability to set the date.
+		T *tmp;
+		try {
+			tmp = new T(year, month, day); //POTENTIELLA MINNESLÄCKOR?????
+		}
+		catch(...) {
+			return false;
+		}
+		std::swap(dp,tmp);
+		delete tmp;
+		return true;
 	}
 
 	template <class T>
@@ -152,11 +160,16 @@ namespace lab2 {
 				if(event_map[tmp]->erase(desc) == 0) {
 					return false;
 				}
+				else {
+					return true;
+				}
+			}
+			else {
+				return false;
 			}
 		}
 		catch(...) {
 			return false;
 		}
-		return true;
 	}
 }

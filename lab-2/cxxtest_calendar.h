@@ -15,7 +15,7 @@ public:
 		set_k_time(t);
 	}
 
-	void test1 () {
+	void test1 () { //Construct calendar from other calendar.
 		Calendar<Gregorian> cg1;
 		Calendar<Julian> cj1;
 
@@ -23,7 +23,7 @@ public:
 		Calendar<Gregorian> cg3(cj1);
 	}
 
-	void test2 () {
+	void test2 () { //Simple add and remove event test.
 		Calendar<Gregorian> c;
 		TS_ASSERT_EQUALS(c.add_event("Event 1"), true);
 		TS_ASSERT_EQUALS(c.add_event("Event 1"), false);
@@ -36,6 +36,29 @@ public:
 
 		Calendar<Julian> j(c);
 		TS_ASSERT_EQUALS(j.add_event("Event 2"), false);
+	}
+
+	void test3 () { // Simple set date testing.
+		Calendar<Julian> j;
+		TS_ASSERT_EQUALS(j.set_date(2000,1,1), true);
+		TS_ASSERT_EQUALS(j.add_event("hello"), true);
+		TS_ASSERT_EQUALS(j.add_event("hello", 1, 1, 2000), false);
+		TS_ASSERT_EQUALS(j.remove_event("hello", 1, 1, 2000), true);
+
+		TS_ASSERT_EQUALS(j.set_date(2001,1,1), true);
+		TS_ASSERT_EQUALS(j.add_event("hello"), true);
+		TS_ASSERT_EQUALS(j.add_event("hello"), false);
+		TS_ASSERT_EQUALS(j.set_date(2002,1,1), true);
+		TS_ASSERT_EQUALS(j.remove_event("hello"), false);
+		TS_ASSERT_EQUALS(j.remove_event("hello"), false);
+		TS_ASSERT_EQUALS(j.set_date(2001,1,1), true);
+		TS_ASSERT_EQUALS(j.remove_event("hello"), true);
+
+		std::cout << std::endl << "Should be an empty calendar:" << std::endl << j << std::endl << std::endl;
+	}
+
+	void testSpecific () {
+
 	}
 
 	void testPrint () {
