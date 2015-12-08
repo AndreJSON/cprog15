@@ -74,15 +74,22 @@ public:
 	void testSpecific2 () {
 		Calendar<Gregorian> g;
 		//std::cout << std::endl << g << std::endl;
-		g.set_date(2012,2,29);
-		g.add_event("pNGVXBK", 7, 2);
-		g.add_event("heru", 7, 3);
-		g.remove_event("pNGVXBK", 11, -9);
-		g.set_date(1990,2,29);
+		TS_ASSERT_EQUALS(g.set_date(2012,2,29), true);
+		TS_ASSERT_EQUALS(g.add_event("pNGVXBK", 7, 2), true);
+		TS_ASSERT_EQUALS(g.add_event("heru", 7, 3), true);
+		TS_ASSERT_EQUALS(g.remove_event("pNGVXBK", 11, -9), false);
+		TS_ASSERT_EQUALS(g.set_date(1990,2,29), false);
 		//std::cout << g << std::endl;
 	}
 
-	
+	void testSpecific3 () {
+		Calendar<Gregorian> g;
+		TS_ASSERT_EQUALS(g.set_date(2004, 2, 29), true);
+		TS_ASSERT_EQUALS(g.add_event("asd", 29), true);
+		TS_ASSERT_EQUALS(g.remove_event("asd", 1), false);
+		TS_ASSERT_EQUALS(g.set_date(2003, 2, 29), false);
+		std::cout << g << std::endl;
+	}
 
 	void testPrint () {
 		Calendar<Gregorian> gc;

@@ -55,7 +55,7 @@ namespace lab2 {
 			os << "VERSION:2.0" << std::endl;
 			os << "PRODID:???????" << std::endl;
 			for (auto i = c.event_map.begin(); i != c.event_map.end(); i++) {
-				if(i->first > *(c.dp)) {
+				if(i->first >= *(c.dp)) {
 					for(auto desc = i->second->begin(); desc != i->second->end(); desc++) {
 						os << "BEGIN:VEVENT" << std::endl;
 						os << "DTSTART:" << format_date(i->first.year(), i->first.month(), i->first.day()) << "T120000" << std::endl;
