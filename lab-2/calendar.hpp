@@ -13,6 +13,7 @@ namespace lab2 {
 	private:
 		T *dp;
 		std::map<T, std::set<std::string>*> event_map;
+		static std::string format_date(int,int,int);
 	public:
 		template <class T2>
 		Calendar(const Calendar<T2> &c) {
@@ -56,7 +57,7 @@ namespace lab2 {
 			for (auto i = c.event_map.begin(); i != c.event_map.end(); i++) {
 				for(auto desc = i->second->begin(); desc != i->second->end(); desc++) {
 					os << "BEGIN:VEVENT" << std::endl;
-					os << "DTSTART:" << i->first.year() << i->first.month() << i->first.day() << "T120000" << std::endl;
+					os << "DTSTART:" << format_date(i->first.year(), i->first.month(), i->first.day()) << "T120000" << std::endl;
 					os << "SUMMARY:" << *desc << std::endl;
 					os << "DESCRIPTION:" << *desc << std::endl;
 					os << "END:VEVENT" << std::endl;
@@ -171,5 +172,14 @@ namespace lab2 {
 		catch(...) {
 			return false;
 		}
+	}
+
+	template <class T>
+	std::string Calendar<T>::format_date(int year, int month, int day) {
+		std::string y = std::to_string(year);
+		std::string m = std::to_string(month);
+		std::string d = std::to_string(day);
+
+		return  y + (m.length()==1? "0":"") + m + (d.length()==1? "0":"") + d;
 	}
 }

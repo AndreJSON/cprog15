@@ -57,7 +57,18 @@ public:
 		std::cout << std::endl << "Should be an empty calendar:" << std::endl << j << std::endl << std::endl;
 	}
 
-	void testSpecific () {
+	void testSpecific () { //Test reproducing a specific problem.
+		Calendar<Julian> j;
+		TS_ASSERT_EQUALS(j.add_event("fizbar", 12, 8, 2015), true);
+		TS_ASSERT_EQUALS(j.set_date(1900,1,1), true);
+		TS_ASSERT_EQUALS(j.add_event("birbaz", 12, 10), true);
+		TS_ASSERT_EQUALS(j.add_event("foobar", 12), true);
+		TS_ASSERT_EQUALS(j.add_event("fizbar", -1, -1, -1), false);
+		TS_ASSERT_EQUALS(j.add_event("fizbar", 0, 0, 0), false);
+		TS_ASSERT_EQUALS(j.remove_event("foobar", 12, 8, 2015), false);
+
+		Calendar<Gregorian> g(j);
+		std::cout << std::endl << j << std::endl;
 
 	}
 
