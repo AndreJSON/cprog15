@@ -55,12 +55,14 @@ namespace lab2 {
 			os << "VERSION:2.0" << std::endl;
 			os << "PRODID:???????" << std::endl;
 			for (auto i = c.event_map.begin(); i != c.event_map.end(); i++) {
-				for(auto desc = i->second->begin(); desc != i->second->end(); desc++) {
-					os << "BEGIN:VEVENT" << std::endl;
-					os << "DTSTART:" << format_date(i->first.year(), i->first.month(), i->first.day()) << "T120000" << std::endl;
-					os << "SUMMARY:" << *desc << std::endl;
-					os << "DESCRIPTION:" << *desc << std::endl;
-					os << "END:VEVENT" << std::endl;
+				if(i->first > *(c.dp)) {
+					for(auto desc = i->second->begin(); desc != i->second->end(); desc++) {
+						os << "BEGIN:VEVENT" << std::endl;
+						os << "DTSTART:" << format_date(i->first.year(), i->first.month(), i->first.day()) << "T120000" << std::endl;
+						os << "SUMMARY:" << *desc << std::endl;
+						os << "DESCRIPTION:" << *desc << std::endl;
+						os << "END:VEVENT" << std::endl;
+					}
 				}
 			}
 			os << "END:VCALENDAR";
@@ -130,12 +132,12 @@ namespace lab2 {
 			else {
 				event_map[tmp] = new std::set<std::string>();
 				event_map[tmp]->insert(desc);
+				return true;
 			}
 		}
 		catch(...) {
 			return false;
 		}
-		return true;
 	}
 
 	template <class T>

@@ -54,10 +54,10 @@ public:
 		TS_ASSERT_EQUALS(j.set_date(2001,1,1), true);
 		TS_ASSERT_EQUALS(j.remove_event("hello"), true);
 
-		std::cout << std::endl << "Should be an empty calendar:" << std::endl << j << std::endl << std::endl;
+		//std::cout << std::endl << "Should be an empty calendar:" << std::endl << j << std::endl << std::endl;
 	}
 
-	void testSpecific () { //Test reproducing a specific problem.
+	void testSpecific1 () { //Test reproducing a specific problem.
 		Calendar<Julian> j;
 		TS_ASSERT_EQUALS(j.add_event("fizbar", 12, 8, 2015), true);
 		TS_ASSERT_EQUALS(j.set_date(1900,1,1), true);
@@ -68,15 +68,27 @@ public:
 		TS_ASSERT_EQUALS(j.remove_event("foobar", 12, 8, 2015), false);
 
 		Calendar<Gregorian> g(j);
-		std::cout << std::endl << j << std::endl;
-
+		//std::cout << std::endl << j << std::endl;
 	}
+
+	void testSpecific2 () {
+		Calendar<Gregorian> g;
+		//std::cout << std::endl << g << std::endl;
+		g.set_date(2012,2,29);
+		g.add_event("pNGVXBK", 7, 2);
+		g.add_event("heru", 7, 3);
+		g.remove_event("pNGVXBK", 11, -9);
+		g.set_date(1990,2,29);
+		//std::cout << g << std::endl;
+	}
+
+	
 
 	void testPrint () {
 		Calendar<Gregorian> gc;
 		gc.add_event("Event 1");
 		gc.add_event("Event 1");
 		gc.add_event("Event 2");
-		std::cout << std::endl << gc << std::endl;
+		//std::cout << std::endl << gc << std::endl;
 	}
 };
