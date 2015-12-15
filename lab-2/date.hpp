@@ -23,7 +23,7 @@ namespace lab2 {
 
 	/*
 	* Dates from the first of march year 0 are ok.
-	* There are unfortunately a bunch of stupid constraints to the lab-task that prevents this abstract class from being written in a general and highly extensible way.
+	* There are unfortunately a bunch of constraints to the lab-task that prevents this abstract class from being written in a general and highly extensible way.
 	*/
 	class Date {
 	protected:

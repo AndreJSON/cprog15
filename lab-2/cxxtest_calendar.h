@@ -91,6 +91,26 @@ public:
 		std::cout << g << std::endl;
 	}
 
+	void testMem1 () {
+		Calendar<Gregorian> cg;
+		cg.add_event("pNGVXBK", 7, 2, -5000);
+		Calendar<Julian> cj;
+		cj.set_date(-1,0,3);
+		cj.add_event("helu", -1,0,3);
+		Calendar<Gregorian> cg2(cg);
+		Calendar<Julian> cj2(cj);
+		Calendar<Gregorian> cg3(cj2);
+		Calendar<Gregorian> cg4(cg3);
+		Calendar<Julian> cj3(cg4);
+	}
+
+	void testMem2 () {
+		Calendar<Julian> *cjp = new Calendar<Julian>;
+		(*cjp).add_event("hejsan");
+		(*cjp).set_date(2010,1,1);
+		delete cjp;
+	}
+
 	void testPrint () {
 		Calendar<Gregorian> gc;
 		gc.add_event("Event 1");

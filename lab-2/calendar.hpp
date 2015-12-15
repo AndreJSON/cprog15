@@ -11,7 +11,7 @@ namespace lab2 {
 	template <class T>
 	class Calendar {
 	private:
-		T *dp;
+		T *dp; //Date pointer, keeps track of current date
 		std::map<T, std::set<std::string>*> event_map;
 		static std::string format_date(int,int,int);
 	public:
